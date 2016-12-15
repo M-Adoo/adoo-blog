@@ -10,8 +10,6 @@ before_install:
 - git config --global user.name "Adoo"
 - git config --global user.email "Adoo@outlook.com"
 
-- sed -i'' "s~git@github.com:M-Adoo/adoo-blog.git~https://${GH_TOKEN}:x-oauth-basic@github.com/M-Adoo/adoo-blog.git~" _config.yml
-
 install:
 - npm install
 script:
@@ -23,4 +21,4 @@ after_success:
 - git init
 - git add .
 - git commit -m "Travis Ci auto deploy"
-- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
+- git push --force --quiet "https://${GH_TOKEN}@github.com/M-Adoo/adoo-blog.git" master:gh-pages
