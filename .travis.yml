@@ -19,8 +19,8 @@ script:
 - git submodule update
 - hexo clean && hexo g
 after_success:
-- hexo deploy
-
-env:
-  global:
-    secure: RgVkOPTKSK3gh/T77MxaNpX2MHsNMTFiyLR0O4q9l/2LOGViPrWXEHwrALGzTIMWE/ESKtjAPqMvwJXIHXq54737u3mCIccuRrO90rKHmJEyFwZz/DGZV2KdzcfyCjjl1oFnCMBNmmp7CVODGTuaEJfmi6wDfZorh0a/3seJNw5VvU52N50Wgl3ukaHgz4gNP6jI2OyggFs64SCaw9PCoyRoY5zHRaTM6y4yXgTZwUZAp1bFblMkrBUhnJKwwj8ljX4njuxUf47dIbEgu5ay+0osG3dsIjkz1mpJne3L3Mqe+Tj8D26q3IlC6RYrjzfIToiOG5JcTA+xnMs2HZyQAiJhIRyzMybp1EA7oH3umRT/68CO4qBIQvzKRy1NdLRmpo0bd0Krfwe+nJRsO7tUHBIIjUgdNI8lyXLR2AgQUWuG6jsg3zCP6MIaq4IxsI4zAszCe1QF0o644mGWRK7V9X7cJRJsxXjoCbnW2ovbNbS1Pto8iBxQSVICfwYOYA0tMsn9PWeVarph3tQNHtvnbu087grR331aGnFXZZWpzUh9rdyi2bmdX7efxSA47hNyLlMa70oTEH2jWwGAH/tzTZaafkXWIQXOnFisjNG+VP0e+lsP013Or2Bf/AWWRXfKPzqoIusZpRJdC8imP05F3TvUK1vXL3118zHD26N90Vc=
+- cd ./public
+- git init
+- git add .
+- git commit -m "Travis Ci auto deploy"
+- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
