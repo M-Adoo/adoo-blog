@@ -2,7 +2,10 @@
 title: Qt Quick 笔记（1）：初识 Qt Quick
 date: 2012-02-23 16:45
 categories: QT
-tags: qml, QT, qt quick
+tags:
+    - qml
+    - QT
+    - qt quick
 override_permailink: /develop/cpp/qt/初识-qt-quick
 ---
 
@@ -43,12 +46,13 @@ qml的世界中，UI元素被组织成树形结构，UI元素可以包含其许�
 
 一个简单的例子：
 
-    ```qml
-    import QtQuick 1.1
-    Rectangle{
-        width: 200; height: 150
-        color: "lightblue"
-    }
+```qml
+import QtQuick 1.1
+Rectangle{
+    width: 200; height: 150
+    color: "lightblue"
+}
+```
 
 上面的代码声明了一个矩形，并设定了它的长宽以及颜色，其效果图如下。
 

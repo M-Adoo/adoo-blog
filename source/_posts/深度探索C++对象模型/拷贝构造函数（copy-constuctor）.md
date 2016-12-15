@@ -2,7 +2,10 @@
 title: 拷贝构造函数（copy constuctor）
 date: 2011-11-15 19:44
 categories: 深度探索C++对象模型
-tags: c++, Inside The C++ Object Model, 笔记
+tags:
+    - c++
+    - Inside The C++ Object Model
+    - 笔记
 override_permailink: /develop/cpp/拷贝构造函数（copy-constuctor）
 ---
 
@@ -17,9 +20,11 @@ override_permailink: /develop/cpp/拷贝构造函数（copy-constuctor）
 
 有一个参数的类型是其类类型的构造函数是为拷贝构造函数。如下：
 
-    X::X( const X& x);
-    Y::Y( const Y& y, int =0 );
-    //可以是多参数形式，但其第二个即后继参数都有一个默认值
+```cpp
+X::X( const X& x);
+Y::Y( const Y& y, int =0 );
+//可以是多参数形式，但其第二个即后继参数都有一个默认值
+```
 
 ### 拷贝构造函数的应用
 

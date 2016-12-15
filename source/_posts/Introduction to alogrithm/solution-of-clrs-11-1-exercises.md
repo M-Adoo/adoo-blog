@@ -2,7 +2,11 @@
 title: Solution of CLRS 11.1 exercises
 date: 2011-12-14 14:43
 categories: Introduction to Algorithm -third edition
-tags: bit vector, Exercises, 算法导论, 笔记
+tags:
+    - bit vector
+    - Exercises
+    - 算法导论
+    - 笔记
 override_permailink: /algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises
 ---
 

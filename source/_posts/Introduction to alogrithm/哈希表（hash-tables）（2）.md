@@ -2,7 +2,10 @@
 title: 哈希表（Hash Tables）（2）
 date: 2011-11-09 15:59
 categories: Introduction to Algorithm -third edition
-tags: hash tables, 算法导论, 笔记
+tags:
+    - hash tables
+    - 算法导论
+    - 笔记
 override_permailink: /algorithm/introductiontoalgorithm/哈希表（hash-tables）（2）
 mathjax: true
 ---
@@ -42,29 +45,31 @@ mathjax: true
 假如函数的选择得当,那么k有机会放到每一个位置，也就是说只要哈希表未满，就可以
 插入。看一下插入的伪代码：
     
-    ```C
-    HASH-INSERT(T, k)
-        i = 0
-        repeat j = h(k, i)
-            if T[j] == NIL
-                then T[j] = k
-                return j
-            else i = i + 1
-        until i = m
-        error "hash table overflow"
+```c
+HASH-INSERT(T, k)
+    i = 0
+    repeat j = h(k, i)
+        if T[j] == NIL
+            then T[j] = k
+            return j
+        else i = i + 1
+    until i = m
+    error "hash table overflow"
+```
 
 对于开放地址的查找，很显然按照其探查顺序去查找就可以，直到找到相等的key。伪
 代码：
 
-    ```C
-    HASH-SEARCH(T, k)
-        i = 0
-        repeat j = h(k, i)
-            if T[j] == k
-                then return j
-            i = i + 1
-        until T[j] == NIL or i == m
-        return NIL
+```c
+HASH-SEARCH(T, k)
+    i = 0
+    repeat j = h(k, i)
+        if T[j] == k
+            then return j
+        i = i + 1
+    until T[j] == NIL or i == m
+    return NIL
+```
 
 需要注意的是，对于一个开放地址的哈希表，如果要从中删除一个元素，我们不能简单
 地将存放该元素的位置设置为NIL(用以表示空)，因为如此一来，所有原来因为该位置

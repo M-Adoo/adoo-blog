@@ -2,7 +2,10 @@
 title: 计数排序(Counting Sort)
 date: 2011-09-30 21:54
 categories: Introduction to Algorithm -third edition
-tags: c++, Introduction to algorithm, 笔记
+tags:
+    - c++
+    - Introduction to algorithm
+    - 笔记
 override_permailink: /algorithm/introductiontoalgorithm/算法导论-第八章2-计数排序counting-sort
 ---
 
@@ -22,21 +25,22 @@ override_permailink: /algorithm/introductiontoalgorithm/算法导论-第八章2-
 
 来看伪代码：
 
-    ```cpp
-    COUNTING-SORT(A, B, k)
-        for i = 0 to k 
-            c[i] = 0
-        for j = 1 to A.length
-            C[A[j]] = C[A[j]] + 1
-        //C[i] now contains the number of elements equal to i
-        for i = 1 to k 
-            C[i] = C[j] + C[i - 1]
-        //C[i] now contains the number of elements less than or equal to i
-        for j = A.lenght downto 1 
-            B[C[A[j]]] = A[j]
-            C[A[j]] = C[A[j]] - 1
+```c
+COUNTING-SORT(A, B, k)
+    for i = 0 to k 
+        c[i] = 0
+    for j = 1 to A.length
+        C[A[j]] = C[A[j]] + 1
+    //C[i] now contains the number of elements equal to i
+    for i = 1 to k 
+        C[i] = C[j] + C[i - 1]
+    //C[i] now contains the number of elements less than or equal to i
+    for j = A.lenght downto 1 
+        B[C[A[j]]] = A[j]
+        C[A[j]] = C[A[j]] - 1
 
- 
+```
+
 注意：第十行从后向前迭代能保护相等元素的相对位置，12行减1也是因为考虑到相等的
 元素。
 
@@ -55,28 +59,29 @@ override_permailink: /algorithm/introductiontoalgorithm/算法导论-第八章2-
 
 ### C++实现
 
-    ```cpp
-    #ifndef COUNTING_SORT
-    #define COUNTING_SORT
-    #include<vector>
-    template <typename InputIter,typename OutIter>
-    void CountingSort(InputIter BegIter,InputIter EndIter,
-        OutIter OutputIter, const int Boundary)
+```cpp
+#ifndef COUNTING_SORT
+#define COUNTING_SORT
+#include<vector>
+template <typename InputIter,typename OutIter>
+void CountingSort(InputIter BegIter,InputIter EndIter,
+    OutIter OutputIter, const int Boundary)
+{
+    //the counter
+    std::vector<int> Counter(Boundary,0);  
+    for(auto Index=BegIter;Index!=EndIter;++Index)
+        ++Counter[*Index];
+    // Counter[] holds the number of input element equal to *index;
+    for(int i=1;i!=Boundary;++i)
+        Counter[i]+=Counter[i-1];
+    //Now Counter[] contains the number of elements less than or eaual to i
+    std::vector<int> Result(Counter[Boundary-1],0);
+    for(std::reverse_iterator<InputIter> RIter(EndIter),REnd(BegIter); RIter!=REnd ;++RIter)
     {
-        //the counter
-        std::vector<int> Counter(Boundary,0);  
-        for(auto Index=BegIter;Index!=EndIter;++Index)
-            ++Counter[*Index];
-        // Counter[] holds the number of input element equal to *index;
-        for(int i=1;i!=Boundary;++i)
-            Counter[i]+=Counter[i-1];
-        //Now Counter[] contains the number of elements less than or eaual to i
-        std::vector<int> Result(Counter[Boundary-1],0);
-        for(std::reverse_iterator<InputIter> RIter(EndIter),REnd(BegIter); RIter!=REnd ;++RIter)
-        {
-            Result[Counter[*RIter]-1]=*RIter;
-            --Counter[*RIter];
-        }
-        std::copy(Result.begin (),Result.end (),OutputIter);
+        Result[Counter[*RIter]-1]=*RIter;
+        --Counter[*RIter];
     }
-    #endif
+    std::copy(Result.begin (),Result.end (),OutputIter);
+}
+#endif
+```

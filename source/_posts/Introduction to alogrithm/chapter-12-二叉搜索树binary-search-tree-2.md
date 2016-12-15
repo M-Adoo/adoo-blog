@@ -2,7 +2,10 @@
 title: Chapter 12 二叉搜索树(Binary Search Tree) 2
 date: 2011-12-15 21:39
 categories: Introduction to Algorithm -third edition
-tags: binary search tree, 笔记, 算法导论
+tags:
+	- binary search tree
+	- 笔记
+	- 算法导论
 override_permailink: /algorithm/introductiontoalgorithm/chapter-12-二叉搜索树binary-search-tree-2
 ---
 
@@ -19,15 +22,16 @@ override_permailink: /algorithm/introductiontoalgorithm/chapter-12-二叉搜索�
 
 求后继的伪码：
 	
-	```C
-	TREE-SUCCESSOR(x)
-		if x.right ≠ NIL
-			then return TREE-MINIMUM (x.right )
-			y =x.p
-		while y ≠ NIL and x == y.right
-			x = y
-			y = y.p
-	  	return y
+```c
+TREE-SUCCESSOR(x)
+	if x.right ≠ NIL
+		then return TREE-MINIMUM (x.right )
+		y =x.p
+	while y ≠ NIL and x == y.right
+		x = y
+		y = y.p
+	return y
+```
 
 类似的方法可以被我们用来求前驱，这里省略。
 
@@ -35,25 +39,26 @@ override_permailink: /algorithm/introductiontoalgorithm/chapter-12-二叉搜索�
 
 对于插入操作很好解决，从根节点出发，不断比较，一路向下，直到不能再下，就会找到一个合适的位置。下面是伪码：
 
-	```c
-	TREE-INSERT(T, z)
-		y = NIL
-		x = T.root
-		while x ≠ NIL
-			y=x
-				if z.key < x.key
-					x=x.left
-				else
-					x = x.right
-		z.p=y
-		if y == NIL
-			T.root=z                // Tree T was empty
+```c
+TREE-INSERT(T, z)
+	y = NIL
+	x = T.root
+	while x ≠ NIL
+		y=x
+			if z.key < x.key
+				x=x.left
+			else
+				x = x.right
+	z.p=y
+	if y == NIL
+		T.root=z                // Tree T was empty
+	else 
+		if z.key < y.key
+			y.left = z
 		else 
-			if z.key < y.key
-				y.left = z
-			else 
-				y.right = z
-	
+			y.right = z
+```
+
 至于删除操作，则要麻烦一些，因为删除结点后，我们必须维持搜索二叉树的属性。假定，被删除的结点为z,那么有三种情况:
 
 1.	z没有孩子；
@@ -81,29 +86,30 @@ override_permailink: /algorithm/introductiontoalgorithm/chapter-12-二叉搜索�
 
 以下是删除操作的伪码：
 
-	```C
-	TREE-DELETE(T,z)
-		if z.left == NIL            
-		   TRANSPLANT(T,z,z.right)
-		else if z.right == NIL       
-		   TRANSPLANT(T,z,z.left)
-		else y = TREE-MINIMUM(z.right)
-		   if y.p ≠ z              
-			  TRANSPLANT(T,y,y.right)  
-			  y.right = z.right
-			  y.right.p = y
-		   TRANSPLANT(T,z,y)          
-		   y.left = z.left       
-		   y.left.p = y          
+```c
+TREE-DELETE(T,z)
+	if z.left == NIL            
+		TRANSPLANT(T,z,z.right)
+	else if z.right == NIL       
+		TRANSPLANT(T,z,z.left)
+	else y = TREE-MINIMUM(z.right)
+		if y.p ≠ z              
+			TRANSPLANT(T,y,y.right)  
+			y.right = z.right
+			y.right.p = y
+		TRANSPLANT(T,z,y)          
+		y.left = z.left       
+		y.left.p = y          
 
-	TRANSPLANT(T,u,v)
-	  if u.p == NIL       
-		   T.root = v
-	  else if u == u.p.left   
-		   u.p.left = v
-	  else u.p.right = v      
-	  if v ≠ NIL
-		   v.p = u.p
+TRANSPLANT(T,u,v)
+	if u.p == NIL       
+		T.root = v
+	else if u == u.p.left   
+		u.p.left = v
+	else u.p.right = v      
+	if v ≠ NIL
+		v.p = u.p
+```
 
 注意：伪码中的 TRANSPLANT，只修改 v 与 u的父亲之间的关系，而不修改与u孩子的关系。
 

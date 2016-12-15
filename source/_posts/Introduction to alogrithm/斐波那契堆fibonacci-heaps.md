@@ -2,7 +2,11 @@
 title: 斐波那契堆(Fibonacci Heaps)
 date: 2012-07-30 22:33
 categories: Introduction to Algorithm -third edition
-tags: algorithm, 算法导论, 笔记, fibonacci heaps
+tags:
+    - algorithm
+    - 算法导论
+    - 笔记
+    - fibonacci heaps
 override_permailink: /algorithm/introductiontoalgorithm/斐波那契堆fibonacci-heaps
 ---
 
@@ -61,57 +65,59 @@ EXTRACT-MIN可以分为三步走：
 
 EXTRACT-MiN的伪码为：
 
-    ```cpp
-    EXTRACT-MIN(H)
-        z = H.min
-        if z != NIL
-            for each child of z 
-                add x to the root list of H
-                x.p = NIL
-            remove z from the root list of H
-            if z == z.right
-                H.min = NIL
-            else
-                H.min = z.right
-                CONSOLIDATE(H)
-            H.n = H.n - 1;
-        return z
+```cpp
+EXTRACT-MIN(H)
+    z = H.min
+    if z != NIL
+        for each child of z 
+            add x to the root list of H
+            x.p = NIL
+        remove z from the root list of H
+        if z == z.right
+            H.min = NIL
+        else
+            H.min = z.right
+            CONSOLIDATE(H)
+        H.n = H.n - 1;
+    return z
+```
 
 其中CONSOLIDATE函数正是用来整理斐波那契堆的，它创建一个数组A来暂存根结点，
 并在遍历根链表的过程中将根结点degree相同的树合并。
 
 其伪码如下（其中![][3]，且![][4]，具体证明见书本）：
 
-    ```cpp
-    CONSOLIDATE(H)
-        let A[D(H.n)] be a new array
-        for i = 0 to D(H.n)
-            A[i] = NULL
-        for each node w in the root list of H
-            x = w
-            d = x.degree
-            while A[d] != NULL
-                y = A[d]
-                if x.key > y.key 
-                    exchange x with y
-                HEAP-LINK (H, y, x)
-                A[d] = NIL 
-                d = d + 1
-            A[d] = x 
-        H.min = NIL
-        for i = 0 to D(H.n)
-            if A[i] != NIL
-                if H.min == NIL
-                    create a root list for H contaning just A[i]
+```cpp
+CONSOLIDATE(H)
+    let A[D(H.n)] be a new array
+    for i = 0 to D(H.n)
+        A[i] = NULL
+    for each node w in the root list of H
+        x = w
+        d = x.degree
+        while A[d] != NULL
+            y = A[d]
+            if x.key > y.key 
+                exchange x with y
+            HEAP-LINK (H, y, x)
+            A[d] = NIL 
+            d = d + 1
+        A[d] = x 
+    H.min = NIL
+    for i = 0 to D(H.n)
+        if A[i] != NIL
+            if H.min == NIL
+                create a root list for H contaning just A[i]
+                H.min = A[i]
+            else
+                insert A[i] into H's root list
+                if A[i].key < H.min.key
                     H.min = A[i]
-                else
-                    insert A[i] into H's root list
-                    if A[i].key < H.min.key
-                        H.min = A[i]
-    HEAP-LINK(H, y, x)
-        remove y from the root list of H
-        make y a child of x, incrementing x.degree
-        y.mark = false
+HEAP-LINK(H, y, x)
+    remove y from the root list of H
+    make y a child of x, incrementing x.degree
+    y.mark = false
+```
 
 看一个实例的演示图或许更加清楚明白：
 
@@ -128,28 +134,29 @@ EXTRACT-MiN的伪码为：
 种折中的方式，当一个非根结点失去第二个孩子的时候，也将被移植到根链表中。这
 可以保证根链表中的每棵树都是一个近似二项堆。伪码如下：
 
-    ```cpp
-    DECREASE-KEY(H, x, k)
-        if k > x.key
-            error "new key is greater than current key"
-        x.key = k
-        if y != NIL and x.key < y.key
-            CUT(H, x,  y)
-            CASCADING-CUT(H, y)
-        if x.key < h.min.key
-            H.min = xCUT(H, x, y)
-        remove x from the child list of y, decrementing y.degree
-        add x to the root list of H
-        x.p = NIL
-        x.mark = false
-    CASCADING-CUT(H. y)
-        z = y.p
-        if z != NIL
-            if y.mark == false
-                y.mark = true
-            else
-                CUT(H, y, z)
-                CASCADING-CUT(H, z)
+```cpp
+DECREASE-KEY(H, x, k)
+    if k > x.key
+        error "new key is greater than current key"
+    x.key = k
+    if y != NIL and x.key < y.key
+        CUT(H, x,  y)
+        CASCADING-CUT(H, y)
+    if x.key < h.min.key
+        H.min = xCUT(H, x, y)
+    remove x from the child list of y, decrementing y.degree
+    add x to the root list of H
+    x.p = NIL
+    x.mark = false
+CASCADING-CUT(H. y)
+    z = y.p
+    if z != NIL
+        if y.mark == false
+            y.mark = true
+        else
+            CUT(H, y, z)
+            CASCADING-CUT(H, z)
+```
 
 删除操作则完全可以利用DECREASE-KEY配合EXTRACT-MIN两者完成，先将要删除结点的
 关键字减小为无穷小，则提取最小关键字的结点就可以达到目的。

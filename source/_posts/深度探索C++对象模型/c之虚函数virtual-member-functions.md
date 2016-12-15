@@ -2,7 +2,10 @@
 title: C++之虚函数(Virtual Member Functions)
 date: 2011-11-29 19:50
 categories: 深度探索C++对象模型
-tags: c++, Inside The C++ Object Model, 笔记
+tags:
+	- c++
+	- Inside The C++ Object Model
+	- 笔记
 override_permailink: /develop/cpp/c之虚函数virtual-member-functions
 ---
 
@@ -15,17 +18,19 @@ override_permailink: /develop/cpp/c之虚函数virtual-member-functions
 
 用基类指针来寻址继承类的对象，我们可以这样：
 
-	```cpp
-	Point ptr=new Point3d;               //Point3d继承自Point
+```cpp
+Point ptr=new Point3d;               //Point3d继承自Point
+```
 
 在这种情况下，多态可以在编译期完成（虚基类情况除外），因此被称作消极多态（没有进行虚函数的调用）。相对于消极多态，则有积极多态——指向的对象类型需要在执行期在能决定[^注1]。积极多态的例子如虚函数和RTTI：
 
-	```cpp
-	//例1，虚函数的调用
-	ptr->z();
-	//例2，RTTI 的应用
-	if(Point3d *p=dynamic_cast<Point3d*>(ptr) )
-	    return p->z();
+```cpp
+//例1，虚函数的调用
+ptr->z();
+//例2，RTTI 的应用
+if(Point3d *p=dynamic_cast<Point3d*>(ptr) )
+	return p->z();
+```
 
 关于RTTI的笔记可见笔记[EH & RTTI][]。本文主要精力将集中于虚函数上。对于一个如上例关于虚函数的调用，要如何来保证在执行期调用的是正确的`z()`实体——Point3d::z()而不是调用了Point::z()。来看看虚函数的实现机制吧，它将保证这一点。
 
@@ -55,10 +60,11 @@ override_permailink: /develop/cpp/c之虚函数virtual-member-functions
 
 我们假设`z()`函数在Point虚函数表中的索引为4，回到最初的问题——要如何来保证在执行期调用的是正确的z()实体？其中微妙在于，编译将做一个小小的转换:
 
-	```cpp
-	ptr->z();
-	//被编译器转化为：
-	(*ptr->vptr[4])(ptr);
+```cpp
+ptr->z();
+//被编译器转化为：
+(*ptr->vptr[4])(ptr);
+```
 
 这个转换保证了调用到正确的实体，因为：
 
@@ -71,12 +77,13 @@ override_permailink: /develop/cpp/c之虚函数virtual-member-functions
 
 当使用第一继承的基类指针来调用继承类的虚函数的时候，与单继承的情况没有什么异样，问题出生在当以第二或后继的基类指针（或引用）的使用上。例如：
 
-	```cpp
-	//假设有这样的继承关系：class Derived:public base1,public base2;
-	//base1,base2都定义有虚析构函数。
-	base2 *ptr = new derived;
-	//需要被转换为，这个转换在编译期完成
-	base2 *ptr = temp ? temp + sizeof(base1) : 0 ;
+```cpp
+//假设有这样的继承关系：class Derived:public base1,public base2;
+//base1,base2都定义有虚析构函数。
+base2 *ptr = new derived;
+//需要被转换为，这个转换在编译期完成
+base2 *ptr = temp ? temp + sizeof(base1) : 0 ;
+```
 
 如果不做出上面的转换，那么 ptr 指向的并不是 derived 的 base2 subobject
 。后果是，ptr 将一个derived类型当做base2类型来用。
@@ -86,10 +93,11 @@ override_permailink: /develop/cpp/c之虚函数virtual-member-functions
 **Bjame的解决方法**是将每一个虚函数表的slot
 扩展，以使之存放一个额外的偏移量。于是虚函数的调用：
 
-	```cpp
-	(*ptr->vptr[1])(ptr);
-	//将变成：
-	(*ptr->vptr[1].addr)(ptr+*ptr->vptr[1].offset);
+```cpp
+(*ptr->vptr[1])(ptr);
+//将变成：
+(*ptr->vptr[1].addr)(ptr+*ptr->vptr[1].offset);
+```
 
 其中使用`ptr->vptr[1].addr`用以获取正确的虚函数地址，而`ptr+*ptr->vptr[1].offset`来获得指向对象完整的起点。这种方法的缺点显而易见，代价过大了一点，所有的情况都被这一种占比较小的情况拖累。
 

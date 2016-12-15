@@ -2,7 +2,9 @@
 title: C++对象面面观
 date: 2011-11-11 19:36
 categories: 深度探索C++对象模型
-tags: c++, Inside The C++ Object Model
+tags:
+    - c++
+    - Inside The C++ Object Model
 override_permailink: /develop/cpp/c对象面面观
 ---
 
@@ -40,21 +42,22 @@ C++类包含两种数据成员：静态数据成员和非静态数据成员；�
 
 假定有一个Point类，我们将用三种对象模型来表现它。Point类如下:
 
-    ```cpp
-    class Point  
-    {  
-    public:  
-        Point( float xval ); 
-        virtual ~Point();      
-        float x() const;  
-        static int PointCount();  
+```cpp
+class Point  
+{  
+public:  
+    Point( float xval ); 
+    virtual ~Point();      
+    float x() const;  
+    static int PointCount();  
 
-    protected:  
-        virtual ostream&  print( ostream &os ) const;
-        float _x;  
+protected:  
+    virtual ostream&  print( ostream &os ) const;
+    float _x;  
 
-        static int _point_count;  
-    };  
+    static int _point_count;  
+};  
+```
 
 ### 简单对象模型
 
@@ -107,16 +110,17 @@ C++类包含两种数据成员：静态数据成员和非静态数据成员；�
 在C中将一个一个元素的数组放在struct的末尾，可以令每个struct的对象拥有可变数组。
 看代码：
 
-    ```C
-    struct mumble {  
-       /* stuff */  
-       char pc[ 1 ];  
-    };  
-    // grab a string from file or standard input  
-    // allocate memory both for struct & string  
-    struct mumble *pmumb1 = ( struct mumble* )  
-       malloc(sizeof(struct mumble)+strlen(string)+1);  
-    strcpy( &mumble.pc, string );  
+```c
+struct mumble {  
+    /* stuff */  
+    char pc[ 1 ];  
+};  
+// grab a string from file or standard input  
+// allocate memory both for struct & string  
+struct mumble *pmumb1 = ( struct mumble* )  
+    malloc(sizeof(struct mumble)+strlen(string)+1);  
+strcpy( &mumble.pc, string );  
+```
 
 这是一个很有意思的小技巧，但是别在C++中使用。因为C++的内存布局相对复杂。例如被继
 承，有虚函数… 问题将不可避免的发生。
@@ -139,16 +143,17 @@ C++类包含两种数据成员：静态数据成员和非静态数据成员；�
 
 如下类：
 
-    ```cpp
-    class ZooAnimal {  
-    public:  
-       ZooAnimal();  
-       virtual ~ZooAnimal();  
-       virtual void rotate();  
-    protected:  
-       int loc;  
-       String name;  
-    };  
+```cpp
+class ZooAnimal {  
+public:  
+    ZooAnimal();  
+    virtual ~ZooAnimal();  
+    virtual void rotate();  
+protected:  
+    int loc;  
+    String name;  
+};  
+```
 
 在32位计算机上所占内存为16字节：int四字节，String8字节（一个表示长度的整形，一个
 指向字符串的指针），以及一个指向虚函数表的指针vptr。对于继承类则为基类的内存大小

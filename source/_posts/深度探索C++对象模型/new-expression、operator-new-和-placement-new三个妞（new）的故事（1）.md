@@ -2,7 +2,10 @@
 title: new expression、operator new 和 placement new——三个妞（new）的故事（1）
 date: 2011-12-02 23:35
 categories: 深度探索C++对象模型
-tags: c++, Inside The C++ Object Model, 笔记
+tags:
+	- c++
+	- Inside The C++ Object Model
+	- 笔记
 override_permailink: /develop/cpp/new-expression、operator-new-和-placement-new三个妞（new）的故事（1）
 ---
 
@@ -41,16 +44,18 @@ new expression分配内存。
 operator new其实也是可以直接利用的，譬如当我们只想分配内存，而不愿意进行初始化的
 时候，我们就可以直接用operator new 来进行。用法如下：
 
-	```C
-	T* newelements = static_cast<T*>(operator new ( sizeof(T) );
+```c
+T* newelements = static_cast<T*>(operator new ( sizeof(T) );
+```
 
 标准库重载有两个版本的operator new，分别为单个对象和数组对象服务，单个对象版本的
 提供给分配单个对象new expression调用，数组版的提供给分配数组的 new expression 调
 用：
 
-	```cpp
-	void *operator new(size_t);       // allocate an object
-	void *operator new[](size_t);     // allocate an array
+```cpp
+void *operator new(size_t);       // allocate an object
+void *operator new[](size_t);     // allocate an array
+```
 
 我们可以分别重载这两个版本，来定义我们自己的分配单个对象或对象数组的内存方式。当
 我们自己在重载operator new时，不一定要完全按照上面两个版本的原型重载，唯一的两个

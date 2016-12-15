@@ -2,7 +2,10 @@
 title: new expression、operator new和placement new——三个“妞（new）”的故事（3）
 date: 2011-12-05 23:35
 categories: 深度探索C++对象模型
-tags: c++, Inside The C++ Object Model, 笔记
+tags:
+    - c++
+    - Inside The C++ Object Model
+    - 笔记
 override_permailink: /develop/cpp/new expression、operator new和placement new——三个“妞（new）”的故事（3）
 ---
 

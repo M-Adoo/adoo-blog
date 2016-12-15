@@ -2,7 +2,12 @@
 title: 仿STL 的二叉搜索树的C++实现
 date: 2011-12-17 23:37
 categories: Introduction to Algorithm -third edition
-tags: binary search tree, c++, 算法导论, stl, 笔记
+tags:
+    - binary search tree
+    - c++
+    - 算法导论
+    - stl
+    - 笔记
 override_permailink: /algorithm/introductiontoalgorithm/仿stl-的二叉搜索树的c实现
 ---
 
@@ -29,82 +34,84 @@ override_permailink: /algorithm/introductiontoalgorithm/仿stl-的二叉搜索�
 STL的二叉搜索树的C++我实现了的部分的声明，如果你想看看实现的源码，
 请[点击我][]
 
-    ```cpp
-    //BST.hpp     A data structure which be called  binary search tree 
-    //  2011/12/17   By Adoo
-    // homepage:  http://www.roading.org
-    #ifndef BST_HPP
-    #define BST_HPP
-    #include<iterator>// The binary search tree template
-    template<typename T>
-    class BST{
-    protected:
-        struct node;
-        class node_iterator;public:
-        typedef node_iterator iterator;
-        typedef const node_iterator const_iterator;
-         BST();
-        iterator begin();
-        iterator end();
-        iterator find(T value);
-        iterator insert(T value);
-        template<typename iter_type>
-        iterator insert(iter_type iter);
-        void  eraser(iterator iter);
-        void eraser(iterator ibeg, iterator iend);
-        int eraser(T value); 
-        ~  BST();
-        
-    private:
-        node*  _root;
-    };
-    //The node for binary search tree
-    template<typename T>
-    struct BST<T>::node{
-        node();
-        T  _value;
-        node  *_left;
-        node  *_right;
-        node  *_parent;
-        // I should implement some override operator at here , but  I omit these. 
-    };template<typename T>
-    class BST<T>::node_iterator: 
-        public std::iterator<std::bidirectional_iterator_tag ,node>
-    {
-    public:
-        node_iterator(node* n);
-        T& operator* ();
-        node* operator ->();
-        node_iterator operator++ ();
-        node_iterator operator++(int);
-        node_iterator min();
-        bool operator ==( node_iterator r_iter);
-        bool operator !=(const node_iterator r_iter);
-        node* pointer();
-    private:
-        node* _node;
-    };
-    #endif
-
+```cpp
+//BST.hpp     A data structure which be called  binary search tree 
+//  2011/12/17   By Adoo
+// homepage:  http://www.roading.org
+#ifndef BST_HPP
+#define BST_HPP
+#include<iterator>// The binary search tree template
+template<typename T>
+class BST{
+protected:
+    struct node;
+    class node_iterator;public:
+    typedef node_iterator iterator;
+    typedef const node_iterator const_iterator;
+        BST();
+    iterator begin();
+    iterator end();
+    iterator find(T value);
+    iterator insert(T value);
+    template<typename iter_type>
+    iterator insert(iter_type iter);
+    void  eraser(iterator iter);
+    void eraser(iterator ibeg, iterator iend);
+    int eraser(T value); 
+    ~  BST();
+    
+private:
+    node*  _root;
+};
+//The node for binary search tree
+template<typename T>
+struct BST<T>::node{
+    node();
+    T  _value;
+    node  *_left;
+    node  *_right;
+    node  *_parent;
+    // I should implement some override operator at here , but  I omit these. 
+};template<typename T>
+class BST<T>::node_iterator: 
+    public std::iterator<std::bidirectional_iterator_tag ,node>
+{
+public:
+    node_iterator(node* n);
+    T& operator* ();
+    node* operator ->();
+    node_iterator operator++ ();
+    node_iterator operator++(int);
+    node_iterator min();
+    bool operator ==( node_iterator r_iter);
+    bool operator !=(const node_iterator r_iter);
+    node* pointer();
+private:
+    node* _node;
+};
+#endif
+```
 上述部分的实现,使得我们可以类似使用STL中的容器一样来操作BST
 了，当然还应该实现更多的函数以及操作符来提供更多的支持，但就
 上面实现的那些而言，我们已经可以做类似如下的操作了：
 
-    ```cpp
-    //用特定的迭代器来遍历 BST
-    for(BST<int>::iterator  iter=B.begin(); iter != B.end(); ++iter)
-    {
-        cout<<*iter<<" ";
-    }
+```cpp
+//用特定的迭代器来遍历 BST
+for(BST<int>::iterator  iter=B.begin(); iter != B.end(); ++iter)
+{
+    cout<<*iter<<" ";
+}
+```
 
 接受值类型匹配的其它类型的迭代器来作为插入：
 
-    ```cpp
-    BST<int> s;
-    for(vector<int>::iterator   iter=vec.begin(); iter!=vec.end() ; ++iter)
-    {
-        s.insert(iter);
-    }
+```cpp
+BST<int> s;
+for(vector<int>::iterator   iter=vec.begin(); iter!=vec.end() ; ++iter)
+{
+    s.insert(iter);
+}
+```
 
 …总之，目的是让BST使用起来与STL 一样的风格。
 

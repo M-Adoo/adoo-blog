@@ -2,7 +2,9 @@
 title: C++对象的数据成员
 date: 2011-11-24 13:00
 categories: 深度探索C++对象模型
-tags: Inside The C++ Object Model, data object
+tags:
+    - Inside The C++ Object Model
+    - data object
 override_permailink: /develop/cpp/c对象的数据成员
 ---
 
@@ -34,19 +36,20 @@ override_permailink: /develop/cpp/c对象的数据成员
 
 看一小段代码：
 
-    ```cpp
-    class X{
-    public:
-        int a;
-        virtual void vfc(){};
-    };
-    int main()
-    {
-        using namespace std;
-        X x;
-        cout<<&x.a<<" "<<&x<<endl;
-        system("pause");
-    }
+```cpp
+class X{
+public:
+    int a;
+    virtual void vfc(){};
+};
+int main()
+{
+    using namespace std;
+    X x;
+    cout<<&x.a<<" "<<&x<<endl;
+    system("pause");
+}
+```
 
 在VS2010和VC6.0中运行的结果都是地址值&x.a比&x大4，可见说vc的vptr放在对象的最前面此言非虚。
 
@@ -58,23 +61,25 @@ override_permailink: /develop/cpp/c对象的数据成员
 
 看一段代码：
 
-    ```cpp
-    class X{
-    public:
-        int x;
-        char c;
-    };
-    class X2:public X
-    {
-    public:char  c2;
-    };
+```cpp
+class X{
+public:
+    int x;
+    char c;
+};
+class X2:public X
+{
+public:char  c2;
+};
+```
 
 X2的布局应当是x(4),c(1),c2(1),这么说来sizeof(X2)的值应该是8？错了，实际上是12。原因在于X后面的三个字节的填充空白不能为c2所用。也就是说X2的大小实际上为：X(8)+c2(1)+填补（3）=12。这样看来编译器似乎是那么的呆板，其实不然，看一下下面的语句会发生什么？
 
-    ```cpp
-    X2 x2;
-    X x;
-    x2=x;
+```cpp
+X2 x2;
+X x;
+x2=x;
+```
 
 如果X后面的填充空白可以被c2使用的话，那么X2和X都将是8字节。上面的语句执行后x2.c2的值会是多少？一个不确定的值！这样的结果肯定不是我们想要的。
 
@@ -87,18 +92,19 @@ X2的布局应当是x(4),c(1),c2(1),这么说来sizeof(X2)的值应该是8？错
 
 如：
 
-    ```cpp
-    class X{
-        virtual void vf(){};
-    };
-    class X2:virtual public X
-    {
-      virtual void vf(){};
-    };
-    class X3:virtual public  X2
-    {
-         virtual void vf(){};
-    }
+```cpp
+class X{
+    virtual void vf(){};
+};
+class X2:virtual public X
+{
+    virtual void vf(){};
+};
+class X3:virtual public  X2
+{
+     virtual void vf(){};
+}
+```
 
 X3将包含有一个Vptr，两个Vbptr。确切的说这两个Vbptr一个属于X3，一个属于X3的子对象X2,X3通过其Vbptr找到子对象X2，而X2通过其Vbptr找到X。
 

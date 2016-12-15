@@ -2,7 +2,9 @@
 title: Chapter 13 Red-Black trees (红黑树)
 date: 2011-12-25 22:43
 categories: Introduction to Algorithm -third edition
-tags: 算法导论, red black trees
+tags: 
+- 算法导论
+- red black trees
 override_permailink: /algorithm/introductiontoalgorithm/chapter-13-red-black-trees-红黑树
 ---
 
@@ -54,20 +56,21 @@ PREDECESSOR。无疑，当树的高度比较小的时候这些操作有很好的
 
 左旋的伪代码：
 
-	```C
-	LEFT-ROTATE(T, x)
-		y = x.right                 //set y
-		x.right = y.left            //turn y's left subtree into x's right subtree
-		if y.left != T.nil
-			y.left.p = x
-		y.p = x.p                   //link x's parent to y 
-		if x.p == t.nil
-			T.root = y
-		else if x == x.p.left
-			x.p.left = y 
-		else x.p.right = y
-		x.left = x                  //put x on y's left
-		x.p = y
+```c
+LEFT-ROTATE(T, x)
+	y = x.right                 //set y
+	x.right = y.left            //turn y's left subtree into x's right subtree
+	if y.left != T.nil
+		y.left.p = x
+	y.p = x.p                   //link x's parent to y 
+	if x.p == t.nil
+		T.root = y
+	else if x == x.p.left
+		x.p.left = y 
+	else x.p.right = y
+	x.left = x                  //put x on y's left
+	x.p = y
+```
 
 左旋操作在具体的红黑树中的演示：
 
@@ -77,28 +80,29 @@ PREDECESSOR。无疑，当树的高度比较小的时候这些操作有很好的
 
 红黑树的插入操作与二叉搜索树的插入操作非常相似，毕竟红黑树也是一种二叉搜索树。其伪代码为：
 	
-	```C
-	RB-INSERT(T, z)
-		y = T.nil
-		x = T.root
-		while x != T.nil
-			y = x 
-			if z.key < x.key
-				x = x.left
-			else
-				x = x.right
-		z.p = y 
-		if y == T.nil
-			T.root = z
+```c
+RB-INSERT(T, z)
+	y = T.nil
+	x = T.root
+	while x != T.nil
+		y = x 
+		if z.key < x.key
+			x = x.left
 		else
-			if z.key < y.key
-				y.left = z
-			else 
-				y.right - z
-		z.left = T.nil
-		z.right = T.nil
-		z.color = RED
-		RB-INSERT-FIXUP(T, z)
+			x = x.right
+	z.p = y 
+	if y == T.nil
+		T.root = z
+	else
+		if z.key < y.key
+			y.left = z
+		else 
+			y.right - z
+	z.left = T.nil
+	z.right = T.nil
+	z.color = RED
+	RB-INSERT-FIXUP(T, z)
+```
 
 但也有两处小小的不同：
 
@@ -156,25 +160,26 @@ PREDECESSOR。无疑，当树的高度比较小的时候这些操作有很好的
 
 有了上面的分析，现在要来实现RB-INSERT-FIXUP就比较容易了。伪代码，如下
 
-	```C
-	RB-INSERT-FIXUP(T, z)
-		while z.p.color == RED
-			if z.p == z.p.p.left
-				y = z.p.p.right
-				if y.color == RED
-					z.p.color = BLACK           //case 1
-					y.color = BLACK             //case 1
-					z.p.p.color = RED           //case 1
-					z = z.p.p                   //case 1
-				else
-					if z == z.p.right           //case 2
-						z = z.p                 //case 2
-						LEFT-ROTATE(T, z)       //case 3    
-				z.p.color = BLACK               //case 3
-				z,p.p.color = RED               //case 3
-				RIGHT-ROTATE(T, z.p.p)
-			else(same as then clause
-				whit "right" and "left" exchaged)
+```c
+RB-INSERT-FIXUP(T, z)
+	while z.p.color == RED
+		if z.p == z.p.p.left
+			y = z.p.p.right
+			if y.color == RED
+				z.p.color = BLACK           //case 1
+				y.color = BLACK             //case 1
+				z.p.p.color = RED           //case 1
+				z = z.p.p                   //case 1
+			else
+				if z == z.p.right           //case 2
+					z = z.p                 //case 2
+					LEFT-ROTATE(T, z)       //case 3    
+			z.p.color = BLACK               //case 3
+			z,p.p.color = RED               //case 3
+			RIGHT-ROTATE(T, z.p.p)
+		else(same as then clause
+			whit "right" and "left" exchaged)
+```
 
 ### 删除操作
 
@@ -182,17 +187,17 @@ PREDECESSOR。无疑，当树的高度比较小的时候这些操作有很好的
 
 同样，首先要实现一个“移植函数”RB-TRANSPLANT：
 
-	```c
-	RB-TRANSPLANT(T, u, v)
-		if u.p == T.nil
-			T.root = v
-		else 
-			if u == u.p.left
-				u.p.left = v
-			else
-				u.p.right = v
-		v.p = u.p
-
+```c
+RB-TRANSPLANT(T, u, v)
+	if u.p == T.nil
+		T.root = v
+	else 
+		if u == u.p.left
+			u.p.left = v
+		else
+			u.p.right = v
+	v.p = u.p
+```
 
 RB-TRANSPLANT与二叉搜索树中的 TRANSPLANT基本上没有不同。细微分别之处在于：
 
@@ -201,32 +206,33 @@ RB-TRANSPLANT与二叉搜索树中的 TRANSPLANT基本上没有不同。细微�
 
 删除操作的代码较之二叉搜索树的删除操作代码，虽然主体相近，但差异也明显：
 
-	```C 
-	RB-DELETE(T, z)
-		y = z
-		y-original-color = y.color  
-		if z.left == T.nil
-			z = z.right
-			RB-TRANSLANT(T, z, z,right)
-		else
-			if z.right == T.nil
-				x = z.left
-				RB-TRANSLANT(t, z, z.left)
-			else y = TREE-MINIMUM(z.right)
-				y-original-color = y.color
-				x = y.right
-				if y.p == z
-					x.p = y
-				else
-					RB-TRANPLANT(T, y, y.right)
-					y.right = z.right
-					y.right.p = y
-				RB-TRANSPLANT(T, z, y)
-				y.left = z.left
-				y.left.p = y
-				y.color = z.color
-			if y-original-color == BLACK
-				RB-DELETE-FIXUP(T, x)
+```c 
+RB-DELETE(T, z)
+	y = z
+	y-original-color = y.color  
+	if z.left == T.nil
+		z = z.right
+		RB-TRANSLANT(T, z, z,right)
+	else
+		if z.right == T.nil
+			x = z.left
+			RB-TRANSLANT(t, z, z.left)
+		else y = TREE-MINIMUM(z.right)
+			y-original-color = y.color
+			x = y.right
+			if y.p == z
+				x.p = y
+			else
+				RB-TRANPLANT(T, y, y.right)
+				y.right = z.right
+				y.right.p = y
+			RB-TRANSPLANT(T, z, y)
+			y.left = z.left
+			y.left.p = y
+			y.color = z.color
+		if y-original-color == BLACK
+			RB-DELETE-FIXUP(T, x)
+```
 
 -   多维持了一个结点*y*,可以看出，在*z*只有一个孩子时，*y*保存的是
 	*z*的结点，而在 *z*有两个孩子时，*y*保存的是代替*z* 的结点。
@@ -275,33 +281,33 @@ RB-DELETE-FIXUP 子函数的问题了。
 
 此时再来看，RB-DELETE-FIXUP 的伪码就显得很清晰了：
 
-	```C
-	RB-DELETE-FIXUP(T, x)
-		while x  != T.root and x.color == BLACK
-			if x == x.p.left
-				w = x.p.left
-				if w.color == red       
-					w.color = BLACK                                         //case 1
-					x.p.color = RED                                          //case 1
-					LEFT-ROTATE(T, x.p)                                  //case 1
-					w = x.p.right                                              //case 1
-				if w.left.color == BLACK and w.right.color == BLACk
-					w.color = RED
-					x = x.p
-				else 
-					if  w.right.color == BLACK
-						w.left.color = BLACK
-						RIGHT-ROTATE(T, w)
-						w = x.p.right
-					w.color = x.p.color
-					x.p.color = BLACK
-					w.right.color  = BLACK
-					LEFT-ROTATE(T, x.p)
-					x = T.root
-			else
-				(same as them clause with "right" and "left" exchaged)
-		x.color = BLACK
-
+```c
+RB-DELETE-FIXUP(T, x)
+	while x  != T.root and x.color == BLACK
+		if x == x.p.left
+			w = x.p.left
+			if w.color == red       
+				w.color = BLACK                                         //case 1
+				x.p.color = RED                                          //case 1
+				LEFT-ROTATE(T, x.p)                                  //case 1
+				w = x.p.right                                              //case 1
+			if w.left.color == BLACK and w.right.color == BLACk
+				w.color = RED
+				x = x.p
+			else 
+				if  w.right.color == BLACK
+					w.left.color = BLACK
+					RIGHT-ROTATE(T, w)
+					w = x.p.right
+				w.color = x.p.color
+				x.p.color = BLACK
+				w.right.color  = BLACK
+				LEFT-ROTATE(T, x.p)
+				x = T.root
+		else
+			(same as them clause with "right" and "left" exchaged)
+	x.color = BLACK
+```
 
 [二叉搜索树]: http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91binary-search-tree.html
 [red-black-trees]: http://www.roading.org/images/2011-12/thumb.jpg

@@ -2,7 +2,11 @@
 title: Qt Quick 笔记（2）——用户界面相关
 date: 2012-02-24 15:34
 categories: QT
-tags: qml, QT, qt quick, 笔记
+tags:
+    - qml
+    - QT
+    - qt quick
+    - 笔记
 override_permailink: /Qt/about-ui
 ---
 
@@ -13,22 +17,23 @@ override_permailink: /Qt/about-ui
 
 一个例子：
 
-    ```qml
-    import QtQuick 1.1 
+```qml
+import QtQuick 1.1 
+Rectangle{
+    width: 400 ; height: 300
+    color:"gray"
     Rectangle{
-        width: 400 ; height: 300
-        color:"gray"
+        x:50; y: 50
+        width:300; height: 200
+        color: "lightblue"
         Rectangle{
-            x:50; y: 50
-            width:300; height: 200
-            color: "lightblue"
-            Rectangle{
-                x:50 ; y: 50
-                width: 200 ; height: 100;
-                color:"red"
-            }
+            x:50 ; y: 50
+            width: 200 ; height: 100;
+            color:"red"
         }
     }
+}
+```
 
 上例中浅蓝色和红色的矩形都是“Nested Element”，通过右边的显示效果可以看出，每一个
 “Nested Element”设定的位置都是相对于父元素的，而不是绝对位置。
@@ -48,7 +53,7 @@ override_permailink: /Qt/about-ui
 
 三种方法的实例：
 
-    ```qml
+```qml
     import QtQuick 1.1 
     Item{
         width:150;  height: 50

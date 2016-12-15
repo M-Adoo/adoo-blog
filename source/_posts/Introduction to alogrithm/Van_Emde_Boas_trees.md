@@ -2,7 +2,9 @@
 title: Van Emde Boas trees
 date: 2013-06-10 17:28
 categories: Introduction to Algorithm -third edition
-tags: Exercises, 算法导论
+tags:
+    - Exercises
+    - 算法导论
 override_permailink: /algorithm/introductiontoalgorithm/Van_Emde_Boas_trees
 mathjax: true
 ---
@@ -12,6 +14,8 @@ INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在
 杂度\\( O(\lg{\lg n}) \\)之内。不过有些限制的是，所有的Kye值都必须在
 \\( 0 \dots n-1 \\)之间，且不能有重复值。换言之，他的算法复杂度不由数据的规模
 有多 大而决定，而由key值的取值范围而决定。
+
+<!-- more -->
 
 算导上这一章的讲述方式我非常喜欢，循序渐进，从最基础最简单的一个结构开始，最终
 演化成Van Emde Boas trees，这样的方式更能让人捕捉到发明人思路发展的一个演变过
@@ -142,21 +146,23 @@ constant height怎么样，一路递归下去情况会如何?
 在从\\(cluster[i]\\)表示的集合中得到最小值，结合i值可以得到全局的最小值。伪
 码：
 
-    PROTO-VEB-MINIMUMN(V)
-        if V.u == 2
-            if V.A[0] == 1
-                return 0
-            else if V.A[1] == 1
-                return 1
-            else
-                return NIL
+```
+PROTO-VEB-MINIMUMN(V)
+    if V.u == 2
+        if V.A[0] == 1
+            return 0
+        else if V.A[1] == 1
+            return 1
         else
-            min-cluster = PROTO-VEB-MINIMUM(V.summary)
-            if min-cluster == NIL
-                return NIL
-            else
-                offset = PROTO-VEB-MINIMUN(V.cluster[min-cluster])
-                return index(min-cluster, offset)
+            return NIL
+    else
+        min-cluster = PROTO-VEB-MINIMUM(V.summary)
+        if min-cluster == NIL
+            return NIL
+        else
+            offset = PROTO-VEB-MINIMUN(V.cluster[min-cluster])
+            return index(min-cluster, offset)
+```
 
 复杂度
 \[ T(u) = 2T(\sqrt u) + O(1)\] 设\\( u = 2^m\\) 
@@ -172,24 +178,25 @@ constant height怎么样，一路递归下去情况会如何?
 
 伪码：
 
-    PROTO-VEB-SUCCESSOR(V, x)
-        if V.u == 2
-            if x == 0 and V.A[1] == 1
-                return 1
-            else 
-                return NIL
+```
+PROTO-VEB-SUCCESSOR(V, x)
+    if V.u == 2
+        if x == 0 and V.A[1] == 1
+            return 1
+        else 
+            return NIL
+    else
+        offset = PROTO-VEB-SUCCESSOR(V.cluster[high(x)], low(x))
+        if(offset != NIL)
+            retuen index(high(x), offset)
         else
-            offset = PROTO-VEB-SUCCESSOR(V.cluster[high(x)], low(x))
-            if(offset != NIL)
-                retuen index(high(x), offset)
+            succ-cluster = PROTO-VEB-SUCCESSOR(V.summary, high(x))
+            if succ-cluster != NIL
+                offset = PROTO-VEB-MINIMUM(V.cluster[succ-cluster])
+                return index(succ-cluster, offset)
             else
-                succ-cluster = PROTO-VEB-SUCCESSOR(V.summary, high(x))
-                if succ-cluster != NIL
-                    offset = PROTO-VEB-MINIMUM(V.cluster[succ-cluster])
-                    return index(succ-cluster, offset)
-                else
-                    return NIL
-
+                return NIL
+```
 复杂度: 
 \[ T(u) = 2T(\sqrt u) + \theta(\lg{\sqrt u})\]
 \[ = 2T(\sqrt u) + \theta(\lg u)\]
@@ -199,12 +206,14 @@ constant height怎么样，一路递归下去情况会如何?
 
 一路向下递归插入，并将summary相应设为1即可。伪码：
 
-    PROTO-VEB-INSERT(V, x)
-        if V.u == 2
-            V.A[x] = 1
-        else
-            PROTO-VEB-INSERT(V.summary, high(x))
-            PROTO-VEB-INSERT(V.cluster[high(x)], low(x))
+```
+PROTO-VEB-INSERT(V, x)
+    if V.u == 2
+        V.A[x] = 1
+    else
+        PROTO-VEB-INSERT(V.summary, high(x))
+        PROTO-VEB-INSERT(V.cluster[high(x)], low(x))
+```
 
 复杂度和PROTO-VEB-MINIMUN一样
 \[ T(u) = 2T(\sqrt u) + O(1)\]
@@ -264,43 +273,49 @@ vEB(\\(\lfloor (\lg u)/2 \rfloor\\))。直观起见，将
 
 #### 最大值和最小值
 
-    VEB-TREE-MINIMUN(V)
-        return V.min
-    VEB-TREE-MAXIMUM(V)
-        return V.max
+```
+VEB-TREE-MINIMUN(V)
+    return V.min
+VEB-TREE-MAXIMUM(V)
+    return V.max
+```
 
 #### 判断一个值是否存在
 
-    VEB-TREE-MEMBER(V, x)
-        if x == V.min or x == v.max
-            return TRUE
-        else if V.u == 2
-            return FALSE
-        else
-            return VEB-TREE-MEMBER(V.cluster[high(x)], low(x))
+```
+VEB-TREE-MEMBER(V, x)
+    if x == V.min or x == v.max
+        return TRUE
+    else if V.u == 2
+        return FALSE
+    else
+        return VEB-TREE-MEMBER(V.cluster[high(x)], low(x))
+```
 
 #### 后继
 
-    VEB-TREE-SUCCESSOR(V, x)
-        if V.u == 2
-            if x == 0 and V.max == 1
-                return 1
-            else 
-                return NIL
-        else if V.min != NIL and x < V.min
-            return v.min
+```
+VEB-TREE-SUCCESSOR(V, x)
+    if V.u == 2
+        if x == 0 and V.max == 1
+            return 1
+        else 
+            return NIL
+    else if V.min != NIL and x < V.min
+        return v.min
+    else
+        max-low = VEB-TREE-MAXMIUN(V.cluster[high](x))
+        if max-low != NIL nad low(x) < max-low
+            offset = VEB-TREE-SUCCESSOR(V.cluster[high(x)], low(x))
+            return index(high(x), offset)
         else
-            max-low = VEB-TREE-MAXMIUN(V.cluster[high](x))
-            if max-low != NIL nad low(x) < max-low
-                offset = VEB-TREE-SUCCESSOR(V.cluster[high(x)], low(x))
-                return index(high(x), offset)
+            succ-cluster = VEB-TREE-SUCCESSOR(V.summary, high(x))
+            if succ-cluster == NIL
+                return NIL
             else
-                succ-cluster = VEB-TREE-SUCCESSOR(V.summary, high(x))
-                if succ-cluster == NIL
-                    return NIL
-                else
-                    offset = VEB-TREE-MINIMUN(V.cluster[succ-cluster])
-                    return index(high(succ-cluster), offset)
+                offset = VEB-TREE-MINIMUN(V.cluster[succ-cluster])
+                return index(high(succ-cluster), offset)
+```
 
 #### 前驱
 
@@ -308,48 +323,52 @@ vEB(\\(\lfloor (\lg u)/2 \rfloor\\))。直观起见，将
 
 #### 插入元素
 
-    VEB-EMPTY-TREE-INSERT(V, x)
-        V.min = x
-        V.max = x
-    VEB-TREE-INSERT(V, x)
-        if V.min == NIL
-            VEB-EMPTY-TREE-INSERT(v, x)
-        else if x < V.min
-            exchange x with V.min
-            if V.u > 2
-                if VEB-TREE-MINIMUN(V.cluster[high(x)]) == NIL
-                    VEB-TREE-INSERT(V.summary, high(x))
-                    VEB-EMPTY-TREE-INSERT(V.cluster[high(x)], low(x))
-                else
-                    VEB-TREE-INSERT(V.cluster[high(x)], low(x))
-            if x > V.max 
-                V.max = x
+```
+VEB-EMPTY-TREE-INSERT(V, x)
+    V.min = x
+    V.max = x
+VEB-TREE-INSERT(V, x)
+    if V.min == NIL
+        VEB-EMPTY-TREE-INSERT(v, x)
+    else if x < V.min
+        exchange x with V.min
+        if V.u > 2
+            if VEB-TREE-MINIMUN(V.cluster[high(x)]) == NIL
+                VEB-TREE-INSERT(V.summary, high(x))
+                VEB-EMPTY-TREE-INSERT(V.cluster[high(x)], low(x))
+            else
+                VEB-TREE-INSERT(V.cluster[high(x)], low(x))
+        if x > V.max 
+            V.max = x
+```
 
 #### 删除元素
 
-    VEB-TREE-DELETE(V, x)
-        if V.min == V.max
-            V.min == NIL
-            V.max == NIL
-        else if V.u == 2
-            if x == 0
-                V.min = 1
+```
+VEB-TREE-DELETE(V, x)
+    if V.min == V.max
+        V.min == NIL
+        V.max == NIL
+    else if V.u == 2
+        if x == 0
+            V.min = 1
+        else
+            V.min = 0
+        V.max = V.min
+    else if x == V.min
+            first-cluster = VEB-TREE-MINIMUN(V.summary)
+            x = index(first-cluster, VEB-TREE-MINIMUN(V.cluster[first-cluster]))
+            V.min = x
+        VEB-TREE-DELETE(V.cluster[high(X)], low(x))
+        if VEB-TREE-MINIMUN(V.cluster[high(x)]) == NIL
+            VEB-TREE-DELETE(V.summary, high(x))
+        if x == V.max
+            summary-max = vEB-TREE-MAXIMUN(V.summary)
+            if summary-max == NIL
+                V.max = V.min
             else
-                V.min = 0
-            V.max = V.min
-        else if x == V.min
-                first-cluster = VEB-TREE-MINIMUN(V.summary)
-                x = index(first-cluster, VEB-TREE-MINIMUN(V.cluster[first-cluster]))
-                V.min = x
-            VEB-TREE-DELETE(V.cluster[high(X)], low(x))
-            if VEB-TREE-MINIMUN(V.cluster[high(x)]) == NIL
-                VEB-TREE-DELETE(V.summary, high(x))
-            if x == V.max
-                summary-max = vEB-TREE-MAXIMUN(V.summary)
-                if summary-max == NIL
-                    V.max = V.min
-                else
-                    V.max = index(summary-max, vEB-TREE-MAXMIMUN(V.cluster[summary-max]))
+                V.max = index(summary-max, vEB-TREE-MAXMIMUN(V.cluster[summary-max]))
+```
 
 综合分析上面的几个操作，除了删除操作以外其它几个操作每一次递归调用都只产生一次
 新的递归调用。根据前文的\\( T(u) = T(\sqrt{u}) + O(1) \\)公式，些操作 都是

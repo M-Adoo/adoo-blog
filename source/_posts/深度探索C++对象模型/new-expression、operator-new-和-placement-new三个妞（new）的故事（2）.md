@@ -2,7 +2,10 @@
 title: new expression、operator new和placement new——三个妞（new）的故事（2）
 date: 2011-12-05 15:19
 categories: 深度探索C++对象模型
-tags: c++, Inside The C++ Object Model, 笔记
+tags:
+    - c++
+    - Inside The C++ Object Model
+    - 笔记
 override_permailink: /develop/cpp/new-expression、operator-new-和-placement-new三个妞（new）的故事（2）
 ---
 
@@ -10,17 +13,19 @@ override_permailink: /develop/cpp/new-expression、operator-new-和-placement-ne
 
 最近在网上看到两个关于指针 delete 后的问题。第一种情况：
     
-    ```cpp
-    int* p = new int;
-    delete p;
-    delete p;// p为什么能delete两次，而程序运行的时候还不报错。
+```cpp
+int* p = new int;
+delete p;
+delete p;// p为什么能delete两次，而程序运行的时候还不报错。
+```
 
 第二种情况：
 
-    ```cpp
-    int* p = new int ;
-    delete p;
-    *p = 5;     //delete后对*p进行再赋值居然也可以（他的平台上运行并没有引发什么错误）？
+```cpp
+int* p = new int ;
+delete p;
+*p = 5;     //delete后对*p进行再赋值居然也可以（他的平台上运行并没有引发什么错误）？
+```
 
 在回答这两个问题之前，我们先想想delete p; 这一语句意味着什么？p指向一个地址，以该
 地址为起始地址保存有一个`int`变量（虽然该变量并没有进行初始化），`delete p`之后`p`
@@ -63,30 +68,31 @@ cfront中的`vec_delete`是根据被删除指针的类型来调用析构函数�
 
 我的测试代码如下：
 
-    ```cpp
-    class point{
-    public:
-           virtual ~point(){
-               std::cout<<"point::~point()"<<std::endl;
-           }
-    private:
-        int  a;
-    };
-    class point3d:public point{
-    public:
-        virtual ~point3d()
-           {
-                std::cout<<"point3d::~point3d()"<<std::endl;
-           }
-    private:
-        int b;
-    };
-    int main()
-    {
-        point *p=new point3d[2];
-        delete[] p;
-        system("pause");
-    } ;
+```cpp
+class point{
+public:
+        virtual ~point(){
+            std::cout<<"point::~point()"<<std::endl;
+        }
+private:
+    int  a;
+};
+class point3d:public point{
+public:
+    virtual ~point3d()
+        {
+            std::cout<<"point3d::~point3d()"<<std::endl;
+        }
+private:
+    int b;
+};
+int main()
+{
+    point *p=new point3d[2];
+    delete[] p;
+    system("pause");
+} ;
+```
 
 输出的结果，也令人满意：
 
@@ -98,17 +104,19 @@ cfront中的`vec_delete`是根据被删除指针的类型来调用析构函数�
 函数是否为虚函数没有把握。所以最好还是不要把一个基类的指针指向派生类数组。非得这么
 做？那么我认为`delete`的时候将之类类型转换为派生类就差不多了，可以这样:
 
-    ```cpp
-    delete[] static_cast<point3d*>(p);
+```cpp
+delete[] static_cast<point3d*>(p);
+```
 
 似乎不必要像Lippman说的这样：
 
-    ```cpp
-    for ( int ix = 0; ix < elem_count; ++ix ) 
-    {  
-       Point3d *p = &((Point3d*)ptr)[ ix ];  
-       delete p;  
-    }  
+```cpp
+for ( int ix = 0; ix < elem_count; ++ix ) 
+{  
+    Point3d *p = &((Point3d*)ptr)[ ix ];  
+    delete p;  
+}  
+```
 
 参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。
 

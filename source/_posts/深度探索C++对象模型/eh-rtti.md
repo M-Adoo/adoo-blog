@@ -2,7 +2,9 @@
 title: EH & RTTI
 date: 2011-12-08 22:24
 categories: 深度探索C++对象模型
-tags: EH, Inside The C++ Object Model, RTTI
+tags: 
+    - EH
+    - Inside The C++ Object Model, RTTI
 override_permailink: /develop/cpp/eh-rtti
 ---
 
@@ -28,23 +30,24 @@ C++的 exception handling 有三个主要的子句组成：
 delete之间的代码抛出了异常，那么将导致本该进行的unlock或delete操作不能进行。解决
 方法之一是：
 
-    ```C
-    void  mumble( void *arena )  
-    {  
-       Point *p;  
-       p = new Point;  
-       try {  
-          smLock( arena );  
-          // ...  
-       }  
-       catch ( ... ) {  
-          smUnLock( arena );  
-          delete p;  
-          throw;  
-       }  
-       smUnLock( arena );  
-       delete p;  
+```c
+void  mumble( void *arena )  
+{  
+    Point *p;  
+    p = new Point;  
+    try {  
+        smLock( arena );  
+        // ...  
     }  
+    catch ( ... ) {  
+        smUnLock( arena );  
+        delete p;  
+        throw;  
+    }  
+    smUnLock( arena );  
+    delete p;  
+}  
+```
 
 在函数被出栈之前，先截住异常，在unlock和delete之后再将异常原样抛出。new expression
 的调用不用包括在try块之内是因为，不论在new operator调用时还是构造函数调用时抛出异

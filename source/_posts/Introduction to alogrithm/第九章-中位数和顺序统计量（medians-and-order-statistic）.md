@@ -2,7 +2,11 @@
 title: 第九章 中位数和顺序统计量（Medians and Order Statistic）
 date: 2011-10-17 20:38
 categories: Introduction to Algorithm -third edition
-tags: c++, 算法导论, 笔记, Order Statistic
+tags:
+    - c++
+    - 算法导论
+    - 笔记
+    - Order Statistic
 override_permailink: /algorithm/introductiontoalgorithm/第九章-中位数和顺序统计量（medians-and-order-statistic）
 mathjax: true
 ---
@@ -47,18 +51,19 @@ n-1次比较。且这已经是最优方法，因为除了最小的数本身，�
 
 **伪代码为**
     
-    ```C
-    RANDOMIZED-SELECT(A, p, r, i)
-        if p == r
-            then return A[p]
-        q = RANDOMIZED-PARTITION(A, p, r)
-        k = q - p + 1
-        if i == k          // the pivot value is the answer
-            then return A[q]
-        else
-            if i < k
-                then return RANDOMIZED-SELECT(A, p, q - 1, i)
-            else return RANDOMIZED-SELECT(A, q + 1, r, i - k)
+```c
+RANDOMIZED-SELECT(A, p, r, i)
+    if p == r
+        then return A[p]
+    q = RANDOMIZED-PARTITION(A, p, r)
+    k = q - p + 1
+    if i == k          // the pivot value is the answer
+        then return A[q]
+    else
+        if i < k
+            then return RANDOMIZED-SELECT(A, p, q - 1, i)
+        else return RANDOMIZED-SELECT(A, q + 1, r, i - k)
+```
 
 函数RANDOMIZED-PARTITION(A, p, r)为随机快排的辅助函数，其功能为在其目标数组A
 的第p个到第r个元素之间，随机选取一个数作为中枢值，并以此将p-r分为两部分，并
@@ -66,23 +71,25 @@ n-1次比较。且这已经是最优方法，因为除了最小的数本身，�
 
 ### C++实现
 
-    //RadomizedSelect
-    //by Adoo  2011/10/17#ifndef RADOMIZEDSELECT
-    #define RADOMIZEDSELECT
-    #include"QuickSort.h"template<typename Iter>
-    Iter RadomizedSelect(Iter IBeg,Iter IEnd,int index)
-    {
-        if(std::distance(IBeg,IEnd)<2)
-            return IBeg;
-        auto apart=RadomPartition(IBeg,IEnd);
-        // Don´t forget add 1;
-        int i=std::distance(IBeg,apart)+1;
-        if(index==i)
-            return apart;
-        else
-            return index<i ? RadomizedSelect(IBeg,apart,index):RadomizedSelect(++apart,IEnd,index-i);   
-    }
-    #endif
+```cpp
+//RadomizedSelect
+//by Adoo  2011/10/17#ifndef RADOMIZEDSELECT
+#define RADOMIZEDSELECT
+#include"QuickSort.h"template<typename Iter>
+Iter RadomizedSelect(Iter IBeg,Iter IEnd,int index)
+{
+    if(std::distance(IBeg,IEnd)<2)
+        return IBeg;
+    auto apart=RadomPartition(IBeg,IEnd);
+    // Don´t forget add 1;
+    int i=std::distance(IBeg,apart)+1;
+    if(index==i)
+        return apart;
+    else
+        return index<i ? RadomizedSelect(IBeg,apart,index):RadomizedSelect(++apart,IEnd,index-i);   
+}
+#endif
+```
 
 注：代码中用到QuickSort.h头文件中的RadomPartition函数，具体实现可以见[快速排序][]
 中源码中关于Partition函数的实现，唯一不同即是pivot的选取，Parition默认用最后一个
@@ -114,25 +121,26 @@ n-1次比较。且这已经是最优方法，因为除了最小的数本身，�
 
 用自然语言来形容感觉有点复杂，我自己写了一段伪代码：
 
-    ```C
-    Select(A,p,r,i)
-        index=p
-        while true
-            if(k > p)
-                InsertSort(A,index-5,r)
-                B.add(A[(r+index-5)/2])
-                break
-            else
-                InsertSort(A,index,index+4)
-                B.add(A[index+2])
-                index=index+5
-        pivot=Select(B,0,B.length,B.length/2)
-        q=partition(A,p,r,pivot)
-        k=q-p+1
-        if(k==i)
-            return pivot
+```c
+Select(A,p,r,i)
+    index=p
+    while true
+        if(k > p)
+            InsertSort(A,index-5,r)
+            B.add(A[(r+index-5)/2])
+            break
         else
-           retrun i<pivot ? Select(B,0,k-1,i) : Select(B,k+1,r,i-k)
+            InsertSort(A,index,index+4)
+            B.add(A[index+2])
+            index=index+5
+    pivot=Select(B,0,B.length,B.length/2)
+    q=partition(A,p,r,pivot)
+    k=q-p+1
+    if(k==i)
+        return pivot
+    else
+        retrun i<pivot ? Select(B,0,k-1,i) : Select(B,k+1,r,i-k)
+```
 
 ### 关于算法复杂度的证明
 

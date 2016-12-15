@@ -2,11 +2,14 @@
 title: Chapter 10 Exercises（1）
 date: 2011-11-05 14:49
 categories: Introduction to Algorithm -third edition
-tags: Exercises, 算法导论, 笔记
+tags:
+	- Exercises
+	- 算法导论
+	- 笔记
 override_permailink: /algorithm/introductiontoalgorithm/chapter-10-exercises（1）-2
 ---
 
-###Exercises 10.1-2★
+### Exercises 10.1-2★
 
 >Explain how to implement two stacks in one array *A*[*1* ‥ *n*] in such a
 >way that neither stack overflows unless the total number of elements in
@@ -27,7 +30,7 @@ override_permailink: /algorithm/introductiontoalgorithm/chapter-10-exercises（1
 
 两种不同的思路，恰恰如同大国奉行的国土攻守政策，思路一主防——凡是我过领土，派兵进驻边境，阻止外国倾入。思路二主攻——凡是无主领地，我便派兵占领。南海问题是一种怎么样的政策？
 
-###Exercises 10.1-6★
+### Exercises 10.1-6★
 
 >Show how to implement a queue using two stacks. Analyze the running time
 >of the queue operations.
@@ -38,7 +41,7 @@ override_permailink: /algorithm/introductiontoalgorithm/chapter-10-exercises（1
 
 以此模型类推，Dequeue和EnQueue操作的复杂度都为O(n).当连续进行Dequeue或连续进行EnQueue操作时，它们的复杂度为1。
 
-###Exercises 10.1-7★
+### Exercises 10.1-7★
 
 >Show how to implement a stack using two queues. Analyze the running time
 >of the stack operations.
@@ -51,30 +54,32 @@ override_permailink: /algorithm/introductiontoalgorithm/chapter-10-exercises（1
 
 算法复杂度，入栈复杂度为O(1),出栈复杂度O(n)。
 
-###Exercises 10.2-7★
+### Exercises 10.2-7★
 
 >Give a Θ(*n*)-time nonrecursive procedure that reverses a singly linked list >of *n* elements. The procedure should use no more than constant storage >beyond that needed for the list itself.
 
 **Soulutions:**在深信服笔试的时候好像做过这个题目，今天看到了特意再做一遍。要在*O*(n)的时间用非递归的方法使得单向线性表转向，要求空间复杂度为*O*(1)。反向嘛，所有的节点next指针指向前面的节点即可。但是有一点要注意的是将next指向它之前的节点的话，会有信息丢失，也就是说，此时你不知道了原来的next指向哪个节点了，迭代就无法继续，所以我们要用另外的空间来保存这些信息。
 
 伪代码：
-	```C
-	ReverseList(L)
-		if(L.head == NIL || L.head->next == NIL)
-			return L; 
-		Pre_OP = L.head; //the previous node of the opera node; 
-		Op=head->next; //Op contain the opera node 
-		Pre_OP->next=NIL; //let the head point to the NIL,then head be the tail  
-		while(Op!= NIL) 
-		 	Next_OP = Op->next
-			Op->next =Pre_OP
-			L.head = Op
-			Pre_op = Op 
-			Op = Next_OP
-			
-	retutn L; 16 
+
+```c
+ReverseList(L)
+	if(L.head == NIL || L.head->next == NIL)
+		return L; 
+	Pre_OP = L.head; //the previous node of the opera node; 
+	Op=head->next; //Op contain the opera node 
+	Pre_OP->next=NIL; //let the head point to the NIL,then head be the tail  
+	while(Op!= NIL) 
+		Next_OP = Op->next
+		Op->next =Pre_OP
+		L.head = Op
+		Pre_op = Op 
+		Op = Next_OP
+		
+retutn L; 16 
+```
 	
-###Exercises 10.2-8: ★
+### Exercises 10.2-8: ★
 
 >Explain how to implement doubly linked lists using only one pointer
 >value *np*[*x*] per item instead of the usual two (*next* and *prev*).
@@ -92,15 +97,16 @@ override_permailink: /algorithm/introductiontoalgorithm/chapter-10-exercises（1
 
 Search函数的伪代码：
 
-	```C
-	Search(L,k)
-		x=L.head 
-		next=x XOR NIL 
-		while(x!=NIL && x.key!=k)
-			p=x XOR next.np
-			x=next
-			next=p 
-	return x
+```c
+Search(L,k)
+	x=L.head 
+	next=x XOR NIL 
+	while(x!=NIL && x.key!=k)
+		p=x XOR next.np
+		x=next
+		next=p 
+return x
+```
 
 Delete与Insert操作的伪代码略。
 

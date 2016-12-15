@@ -2,16 +2,20 @@
 title: 临时性对象(Temporary Objects)
 date: 2011-12-06 17:48
 categories: 深度探索C++对象模型
-tags: c++, Inside The C++ Object Model, 笔记
+tags:
+	- c++
+	- Inside The C++ Object Model
+	- 笔记
 override_permailink: /develop/cpp/临时性对象temporary-objects
 ---
 ### 何时生成临时对象
 
 对于一个下面这样的程序片段：
 
-	```cpp
-	T a, b;
-	T c=a+b;
+```cpp
+T a, b;
+T c=a+b;
+```
 
 死板一点来讲，它应当产生一个临时对象用来存储a+b的结果，然后以临时对
 象作为初值调用拷贝构造函数初始化对象c。而实际上编译器更愿意直接调用
@@ -26,21 +30,24 @@ override_permailink: /develop/cpp/临时性对象temporary-objects
 
 不能忽略临时对象，反而导致如下过程：
 
-	// Pseudo C++ code  
-	// T temp = a + b;  
-	T temp;  
-	a.operator+( temp, b ); 	// @1 [^注1]
-	 
-	// c = temp  
-	c.operator =( temp ); 		// @2  
-	temp.T::~T();  
+```
+// Pseudo C++ code  
+// T temp = a + b;  
+T temp;  
+a.operator+( temp, b ); 	// @1 [^注1]
+	
+// c = temp  
+c.operator =( temp ); 		// @2  
+temp.T::~T();  
+```
 
 在代码@1处，表明以拷贝构造函数或NRV方式将结果保存的临时对象中。为什
 么不能省略那个临时对象，比如直接这样：
 
-	```cpp
-	c.T::~T();
-	c.T::T(a+b);
+```cpp
+c.T::~T();
+c.T::T(a+b);
+```
 
 这不是更高效，更简洁的方式吗？不行，其原因在于，拷贝构造函数、析构
 函数以及赋值操作符都可以由使用者提供，没有人能保证，析构函数加拷贝
@@ -56,9 +63,10 @@ override_permailink: /develop/cpp/临时性对象temporary-objects
 佳行为呢？过早或过晚都不太适合，过早有可能使得程序错误，过晚的话又
 使得资源没有得到及时回收。对于下面的程序：
 
-	```cpp
-	string s1("hello "), s2("world "),s3("by Adoo");
-	std::cout<<s1+s2+s3<<std::endl;
+```cpp
+string s1("hello "), s2("world "),s3("by Adoo");
+std::cout<<s1+s2+s3<<std::endl;
+```
 
 显然保存`s1+s2`结果的临时对象，如果在与s3进行加法之前析构，将会带来
 大麻烦。于是C++标准中有一条：
@@ -76,10 +84,11 @@ override_permailink: /develop/cpp/临时性对象temporary-objects
 	引用的生命结束，或直到临时对象的生命周期结束——视哪一种情况先达
 	到，对应于这种情况：
 
-		```cpp
-		::string s1("hello ");
-		::string &s=s1+"world";
-
+	```cpp
+	::string s1("hello ");
+	::string &s=s1+"world";
+	```
+	
 [^注1]: 侯捷认为此处为 Lippman 的错误，他认为应该为
 `temp.operator + ( a, b )`但我以为是侯捷并没有理解Lippman的意思，回
 顾一下,《深度探索对象模型》2.3讲到的返回值初始化(Return Value 

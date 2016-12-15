@@ -2,7 +2,9 @@
 title: 算法导论6-3 young tableaus
 date: 2011-09-24 12:16
 categories: Introduction to Algorithm -third edition
-tags: 算法导论, young tableaus
+tags:
+    - 算法导论
+    - young tableaus
 override_permailink: /algorithm/introductiontoalgorithm/算法导论6-3-young-tableaus
 ---
 
@@ -44,20 +46,21 @@ override_permailink: /algorithm/introductiontoalgorithm/算法导论6-3-young-ta
 [堆排序][]中MaxHeapfy类似的函数Tableaufy:下面是伪代码，伪代码的所有约定与算法
 导论的伪代码约定一样。
 
-    ```C
-    Tableaufy(A,i,j)
-        if(i < A.RowSize && A[i][j] < A[i+1][j])
-            LargestRow=i+1
-            LargestColum=j
-        else
-            LargestRow=i
-            LargestColum=j
-        if( j < ColumeSize && A[LargestRow][LargesttColume]< A[i][j+1] )
-            LargestRow=i
-            LargestColum=j+1
-        if(LargestRow != i && LargestColum!=j)
-            exchage A[i][j] with A[LargestRow][LargestColum]
-            Tableaufy(A,LargestRow,LargestColum)
+```c
+Tableaufy(A,i,j)
+    if(i < A.RowSize && A[i][j] < A[i+1][j])
+        LargestRow=i+1
+        LargestColum=j
+    else
+        LargestRow=i
+        LargestColum=j
+    if( j < ColumeSize && A[LargestRow][LargesttColume]< A[i][j+1] )
+        LargestRow=i
+        LargestColum=j+1
+    if(LargestRow != i && LargestColum!=j)
+        exchage A[i][j] with A[LargestRow][LargestColum]
+        Tableaufy(A,LargestRow,LargestColum)
+```
 
 一二问省略不说。看第三问，很明显最小的元素是Young Tableaus的最前面一个元素。
 我们只要把这个元素交换提取出来，然后给这个位置的元素赋值为无穷大，然后对第

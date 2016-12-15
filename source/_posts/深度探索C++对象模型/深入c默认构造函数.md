@@ -2,7 +2,9 @@
 title: 深入C++构造函数
 date: 2011-11-12 22:15
 categories: 深度探索C++对象模型
-tags: Inside The C++ Object Model, 笔记
+tags: 
+	- Inside The C++ Object Model
+	- 笔记
 override_permailink: /develop/cpp/深入c默认构造函数
 ---
 

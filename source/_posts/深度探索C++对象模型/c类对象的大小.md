@@ -2,17 +2,20 @@
 title: C++类对象的大小
 date: 2011-11-24 12:41
 categories: 深度探索C++对象模型
-tags: c++, Inside The C++ Object Model, 笔记
+tags:
+	- c++
+	- Inside The C++ Object Model, 笔记
 override_permailink: /develop/cpp/c类对象的大小
 ---
 
 ### 一个实例引出的思考
 
-	```cpp
-	class X{};
-	class Y:virtual public X{};
-	class Z:virtual public X{};
-	class A:public Y, public Z{};
+```cpp
+class X{};
+class Y:virtual public X{};
+class Z:virtual public X{};
+class A:public Y, public Z{};
+```
 
 猜猜sizeof上面各个类都为多少？
 

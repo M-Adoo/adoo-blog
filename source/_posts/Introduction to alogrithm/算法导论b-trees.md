@@ -2,7 +2,10 @@
 title: 算法导论——B-trees
 date: 2012-04-15 22:23
 categories: Introduction to Algorithm -third edition
-tags: B-trees, 算法导论, 笔记
+tags:
+    - B-trees
+    - 算法导论
+    - 笔记
 override_permailink: /algorithm/introductiontoalgorithm/算法导论b-trees
 mathjax: true
 ---
@@ -53,12 +56,13 @@ B-trees的特点是，一个结点可以有n个关键字，这些关键字把一
 
 ### 创建一棵空*B-trees*
 
-  ```c
-  B-TREE-CREATE(T)
-      x = ALLOCATE-NODE()
-      x.leaf = TRUE
-      x.n = 0
-      T.root = x
+```c
+B-TREE-CREATE(T)
+    x = ALLOCATE-NODE()
+    x.leaf = TRUE
+    x.n = 0
+    T.root = x
+```
 
 ### 搜索操作:
 
@@ -66,16 +70,17 @@ B-trees的特点是，一个结点可以有n个关键字，这些关键字把一
 多个key，二是往下走的时候有可能有多个子路。这些不同只在于选路的时候多
 做点判断罢了。下面为伪码：
 
-  ```c
-  B-TREE-SEARCH(x, k)
-    i =1
-    while i ≤ x.n and k >x.keyi
-       i = i + 1
-    if i ≤ x.n and k == x.keyi 
-       return (x, i)
-    if x.leaf
-        return NIL
-    else return B-TREE-SEARCH(x.ci , k)
+```c
+B-TREE-SEARCH(x, k)
+i =1
+while i ≤ x.n and k >x.keyi
+    i = i + 1
+if i ≤ x.n and k == x.keyi 
+    return (x, i)
+if x.leaf
+    return NIL
+else return B-TREE-SEARCH(x.ci , k)
+```
 
 ### 插入操作
 
@@ -89,58 +94,62 @@ B-trees的特点是，一个结点可以有n个关键字，这些关键字把一
 
 分裂结点的伪码：
 
-    ```c
-    B-TREE-SPLIT-CHILD(x, i)
-        z = ALLOCATE-NODE()
-        y=x.ci 
-        z.leaf = y.leaf
-        z.n = t - 1
-        for j = 1 to t - 1
-              z.keyj = y.keyj+t 
-        if not y.leaf
-            for j = 1 to t
-                 z.cj = y.cj+t 
-        y.n = t - 1
-        for j = x.n + 1 downto i + 1
-              x.cj+1 = x.cj 
-        x.ci+1 = z
-        for j = x.n downto i
-             x.keyj+1  = x.keyj 
-        x.keyi  = y.keyt     x.n = x.n + 1
+```c
+B-TREE-SPLIT-CHILD(x, i)
+    z = ALLOCATE-NODE()
+    y=x.ci 
+    z.leaf = y.leaf
+    z.n = t - 1
+    for j = 1 to t - 1
+            z.keyj = y.keyj+t 
+    if not y.leaf
+        for j = 1 to t
+                z.cj = y.cj+t 
+    y.n = t - 1
+    for j = x.n + 1 downto i + 1
+            x.cj+1 = x.cj 
+    x.ci+1 = z
+    for j = x.n downto i
+            x.keyj+1  = x.keyj 
+    x.keyi  = y.keyt     x.n = x.n + 1
+```
 
 插入结点的伪码：
 
-    B-TREE-INSERT(T, k)
-        r =T.root
-        if r.n = 2t - 1
-            s = ALLOCATE-NODE()
-            T.root=s
-            s.leaf = FALSE
-            s.n = 0
-            s.c1 = r
-            B-TREE-SPLIT-CHILD(s, 1)
-            B-TREE-INSERT-NONFULL(s, k)
-       else B-TREE-INSERT-NONFULL(r, k)
+```c
+B-TREE-INSERT(T, k)
+    r =T.root
+    if r.n = 2t - 1
+        s = ALLOCATE-NODE()
+        T.root=s
+        s.leaf = FALSE
+        s.n = 0
+        s.c1 = r
+        B-TREE-SPLIT-CHILD(s, 1)
+        B-TREE-INSERT-NONFULL(s, k)
+    else B-TREE-INSERT-NONFULL(r, k)
+```
 
 在非满根结点插入关键字的伪码(供上面B-Tree-INSERT 使用的一个辅助函数)：
 
-    ```c
-    B-TREE-INSERT-NONFULL(x, k)
-     i = x.n
-     if x.leaf
-         while i ≥ 1 and k < x.keyi       
-             x.keyi+1 =x.keyi   
-             i = i - 1
-        x.keyi+1 = k
-        x.n=x.n+1
-     else while i ≥ 1 and k < x.keyi
-                i =i - 1
+```c
+B-TREE-INSERT-NONFULL(x, k)
+    i = x.n
+    if x.leaf
+        while i ≥ 1 and k < x.keyi       
+            x.keyi+1 =x.keyi   
+            i = i - 1
+    x.keyi+1 = k
+    x.n=x.n+1
+    else while i ≥ 1 and k < x.keyi
+            i =i - 1
+    i = i + 1
+    if x.ci .n == 2t - 1
+        B-TREE-SPLIT-CHILD(x, i)
+    if k> x.keyi 
         i = i + 1
-        if x.ci .n == 2t - 1
-            B-TREE-SPLIT-CHILD(x, i)
-        if k> x.keyi 
-            i = i + 1
-        B-TREE-INSERT-NONFULL(x.ci , k)
+    B-TREE-INSERT-NONFULL(x.ci , k)
+```
 
 ### 删除操作
 

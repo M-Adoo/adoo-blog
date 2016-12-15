@@ -2,9 +2,13 @@
 title: C++实现红黑树，仿STL封装
 date: 2011-12-31 20:37
 categories: Introduction to Algorithm -third edition
-tags: red black trees, 算法导论, C++
+tags: 
+    - red black trees
+    - 算法导论
+    - C++
 override_permailink: /algorithm/introductiontoalgorithm/c实现红黑树，仿stl封装
 ---
+
 在[*Chapter 13 Red-Black trees(红黑树)*][]这篇笔记中对红黑树的各种操作都有较详尽的伪码，
 相信使用C++来实现也并不是难事，我要做的是，在实现的基础上要进行一定的封装。当然风格嘛，
 自然参照STL，最终的结果就是要实现一个STL风格的红黑树模板。
@@ -16,63 +20,65 @@ multiset其基础结构就是红黑树。在这儿、我主要尝试自己封装
 无论如何,从实现来讲，一个`rb_node`的类模板是需要的，不过它将作为 `RB_Tree`类中的一个嵌
 套类，因为`RB_Tree`容器的使用者并不需要知道，`rb_node`实现。`rb_node`的实现：
 
-    ```cpp
-    template<typename Type>
-    struct RB_Tree<Type>::rb_node
-    {
-            Type _value;
-            rb_node  *_left;
-            rb_node  *_right;
-            rb_node  *_parent;
-            RB_Color _color;
-            rb_node()
-                :_value(Type()),_left(NULL),_right(NULL),_parent(NULL),_color(red)
-            {};
-        };
+```cpp
+template<typename Type>
+struct RB_Tree<Type>::rb_node
+{
+        Type _value;
+        rb_node  *_left;
+        rb_node  *_right;
+        rb_node  *_parent;
+        RB_Color _color;
+        rb_node()
+            :_value(Type()),_left(NULL),_right(NULL),_parent(NULL),_color(red)
+        {};
+    };
+```
 
 其次，要定义一个供`RB_Tree`容器使用的迭代器，为了拥有`iterator_trait`它将继承自
 `std::iterator`，当然完全可以自己通过宏定义来实现`iterator_trait` ，但毫无疑问继承的话可以
 写更少的代码.声明如下：
 
-    ```cpp
-    template<typename Type>
-    class RB_Tree<Type>::node_iterator: 
-        public std::iterator<std::bidirectional_iterator_tag ,rb_node>
-    {
-    public:
-        node_iterator(rb_node* n): _node(n){};
-        Type& operator* () const;
-        rb_node* operator –>()const; 
-        node_iterator operator++ ();     
-        node_iterator operator++(int); 
-        bool operator ==( node_iterator r_iter); 
-        bool operator !=( node_iterator r_iter); 
-        rb_node* pointer(); 
-        //…省略很多种运算符重载 
-    private:
-        rb_node* _node;
-    ;
-
+```cpp
+template<typename Type>
+class RB_Tree<Type>::node_iterator: 
+    public std::iterator<std::bidirectional_iterator_tag ,rb_node>
+{
+public:
+    node_iterator(rb_node* n): _node(n){};
+    Type& operator* () const;
+    rb_node* operator –>()const; 
+    node_iterator operator++ ();     
+    node_iterator operator++(int); 
+    bool operator ==( node_iterator r_iter); 
+    bool operator !=( node_iterator r_iter); 
+    rb_node* pointer(); 
+    //…省略很多种运算符重载 
+private:
+    rb_node* _node;
+}
+```
 最后就是`RB_Tree`这个容器了类了，大体上是这样：
 
-    ```cpp
-    template<typename Type>
-    class RB_Tree{
-    private:
-        struct rb_node;
-        class node_iterator;
-    public:
-        typedef  node_iterator iterator;
-        typedef const node_iterator const_iterator;    RB_Tree();
-        ~RB_Tree();
-        iterator begin();
-        iterator end();
-        iterator insert(Type value);    
-        iterator eraser(iterator iter);
-    private:
-        rb_node* _root;
-    public:
-        static rb_node* _nil;
+```cpp
+template<typename Type>
+class RB_Tree{
+private:
+    struct rb_node;
+    class node_iterator;
+public:
+    typedef  node_iterator iterator;
+    typedef const node_iterator const_iterator;    RB_Tree();
+    ~RB_Tree();
+    iterator begin();
+    iterator end();
+    iterator insert(Type value);    
+    iterator eraser(iterator iter);
+private:
+    rb_node* _root;
+public:
+    static rb_node* _nil;
+```
 
 具体的实现代码，你可以下载[RB_Tree.hpp][]
 

@@ -2,7 +2,10 @@
 title: C++之成员函数调用
 date: 2011-11-27 15:14
 categories: 深度探索C++对象模型
-tags: c++, Inside The C++ Object Model, 笔记
+tags:
+	- c++
+	- Inside The C++ Object Model
+	- 笔记
 override_permailink: /develop/cpp/c之成员函数调用
 ---
 
@@ -14,11 +17,12 @@ c++支持三种类型的成员函数，分别为static,nostatic,virtual。每一
 
 1.改写成员函数的签名，使得其可以接受一个额外参数，这个额外参数即是this指针：
 
-	```cpp
-	float Point::X();
-	//成员函数X被插入额外参数this
-	float Point:: X(Point* this );
-	
+```cpp
+float Point::X();
+//成员函数X被插入额外参数this
+float Point:: X(Point* this );
+```
+
 当然如果成员函数是const的，插入的参数类型将为 const Point\* 类型。
 
 2.将每一个对非静态数据成员的操作都改写为经过this操作。
@@ -37,20 +41,22 @@ c++支持三种类型的成员函数，分别为static,nostatic,virtual。每一
 
 于是在VC中对于上面的例子中的成员函数的调用将发生如下的转换：
 
-	```cpp
-	//p->X();被转化为
-	?X@Point@@QAEMXZ(p);
-	//obj.X();被转化为
-	?X@Point@@QAEMXZ(&obj);
+```cpp
+//p->X();被转化为
+?X@Point@@QAEMXZ(p);
+//obj.X();被转化为
+?X@Point@@QAEMXZ(&obj);
+```
 
 ### 虚拟成员函数(Virtual Member Functions)
 
 如果function()是一个虚拟函数，那么用指针或引用进行的调用将发生一点特别的转换——一个中间层被引入进来。例如：
 	
-	```cpp
-	// p->function()
-	//将转化为
-	(*p->vptr[1])(p);
+```cpp
+// p->function()
+//将转化为
+(*p->vptr[1])(p);
+```
 
 -   其中vptr为指向虚函数表的指针，它由编译器产生。vptr也要进行名字处理，因为一个继承体系可能有多个vptr。
 -   1是虚函数在虚函数表中的索引，通过它关联到虚函数function().
@@ -71,8 +77,9 @@ c++支持三种类型的成员函数，分别为static,nostatic,virtual。每一
 
 需要注意的是通过一个表达式或函数对静态成员函数进行调用，被C++ Standard要求对表达式进行求值。如：
 	
-	```cpp
-	(a+=b).static_fuc();
+```cpp
+(a+=b).static_fuc();
+```
 
 虽然省去对a+b求值对于static\_fuc()的调用并没有影响，但是程序员肯定会认为表达式a+=b已经执行，一旦编译器为了效率省去了这一步，很难说会浪费多少程序员多少时间。这无疑是一个明智的规定。
 

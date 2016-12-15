@@ -2,7 +2,10 @@
 title: 并查集(Disjoint Set)
 date: 2013-07-18 18:00
 categories: Introduction to Algorithm -third edition
-tags: 算法导论, Disjoint set, 笔记
+tags:
+	- 算法导论
+	- Disjoint set
+	- 笔记
 override_permailink: /algorithm/introductiontoalgorithm/Disjoint_set
 mathjax: true
 ---
@@ -49,18 +52,20 @@ sets和Union-find set。更准确点应该说并查集是用来操作不相交�
 
 ![graph][]
 
-	CONNECTED-COMPNENTS(G)
-		for each vertex in G.V
-			MAKE-SET(v)
-		for each edge (u, v) in G.E
-			if FIND-SET(u) != FIND-SET(v)
-				UNION(u, v)
+```
+CONNECTED-COMPNENTS(G)
+	for each vertex in G.V
+		MAKE-SET(v)
+	for each edge (u, v) in G.E
+		if FIND-SET(u) != FIND-SET(v)
+			UNION(u, v)
 
-	SAME-COMPONENT(u, v)
-	 	if FIND-SET(u) == FIND-SET(v)
-	 		return TRUE
-	 	else
-	 		return FALSE
+SAME-COMPONENT(u, v)
+	if FIND-SET(u) == FIND-SET(v)
+		return TRUE
+	else
+		return FALSE
+```
 
 #### 并查集的链表表示
 
@@ -161,25 +166,27 @@ UNION(\\(x_n, x_{n-1}\\))	|					n
 
 #### 不相交集森林操作的伪码实现
 
-	MAKE-SET
-		x.p = x
-		x.rank = 0
+```
+MAKE-SET
+	x.p = x
+	x.rank = 0
 
-	UNION(x, y)
-		LINK(FIND-SET(x), FIND-SET(y))
+UNION(x, y)
+	LINK(FIND-SET(x), FIND-SET(y))
 
-	LINK(x, y)
-		if x.rank > y.rank
-			y.p = x
-		else
-			x.p = y
-			if x.rank == y.rank
-				y.rank + 1
+LINK(x, y)
+	if x.rank > y.rank
+		y.p = x
+	else
+		x.p = y
+		if x.rank == y.rank
+			y.rank + 1
 
-	FIND-SET(x)
-		if x != x.p
-			x.p = FIND-SET(x.p)
-			return x.p
+FIND-SET(x)
+	if x != x.p
+		x.p = FIND-SET(x.p)
+		return x.p
+```
 
 当同时使用到上述两种启发式策略时，不相交集森林\\(m\\)个操作的运行时间在
 \\(O(m\alpha(n))\\),\\(\alpha(n)\\)的增长非常慢，在可以想象到的不相交集森林

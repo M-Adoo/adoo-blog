@@ -2,11 +2,13 @@
 title: Chapter 10 Exercises and Problems (2)
 date: 2011-11-06 17:28
 categories: Introduction to Algorithm -third edition
-tags: Exercises, 算法导论
+tags: 
+	- Exercises
+	- 算法导论
 override_permailink: /algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2
 ---
 
-###Exercises 10.3-4
+### Exercises 10.3-4
 
 >It is often desirable to keep all elements of a doubly linked list compact >in storage, using, for example, the first *m* index locations in the >multiple-array representation. (This is the case in a paged, virtual-memory >computing environment.) Explain how the procedures ALLOCATE-OBJECT and FREE->OBJECT can be implemented so that therepresentation is compact. Assume that >there are no pointers to elements of the linked list outside the list >itself. (*Hint:* Use the array implementation of a stack.)
 
@@ -17,29 +19,31 @@ override_permailink: /algorithm/introductiontoalgorithm/chapter-10-exercises-and
 
 资源分配的伪代码：
 	
-	```C
-	Allocate_Object()
-		if(Stack-Empty(free) )
-		     error "overflow"
-		return Pop(free)
+```c
+Allocate_Object()
+	if(Stack-Empty(free) )
+			error "overflow"
+	return Pop(free)
+```
 
 资源回收的伪代码：
 
-	```C
-	Free_Object(x)
-		last_node = Top(free)-1
-		//remove the x 
-		List_Delete(x)
-		//replace last_node by x
-		x.key = last_node.key
-		last_node.prev.next = x
-		last.node.next.prev = x
-		x.prev = last.prev
-		x.next = last.next
-		//free last_node;
-		Push(free,x)
+```c
+Free_Object(x)
+	last_node = Top(free)-1
+	//remove the x 
+	List_Delete(x)
+	//replace last_node by x
+	x.key = last_node.key
+	last_node.prev.next = x
+	last.node.next.prev = x
+	x.prev = last.prev
+	x.next = last.next
+	//free last_node;
+	Push(free,x)
+```
 
-###Exercises 10.3-5
+### Exercises 10.3-5
 
 >Let *L* be a doubly linked list of length *m* stored in arrays *key*,
 >*prev*, and *next* of length *n*. Suppose that these arrays are managed
@@ -56,7 +60,7 @@ override_permailink: /algorithm/introductiontoalgorithm/chapter-10-exercises-and
 
 **Solutions：**遍历双向链表，依次将它的节点交换到数组的前m个位置即可，在交换时需要提供一个额外的节点。
 
-###Problems 10-2: Mergeable heaps using linked lists
+### Problems 10-2: Mergeable heaps using linked lists
 
 >A ***mergeable heap*** supports the following operations: MAKE-HEAP
 >(which creates an empty mergeable heap), INSERT, MINIMUM, EXTRACT-MIN,

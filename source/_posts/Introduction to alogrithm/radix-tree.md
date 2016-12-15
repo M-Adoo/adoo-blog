@@ -2,7 +2,10 @@
 title: Radix Tree 基数树
 date: 2011-12-21 21:12
 categories: Introduction to Algorithm -third edition
-tags: Problem, radix tree, 笔记
+tags: 
+    - Problem
+    - radix tree
+    - 笔记
 override_permailink: /algorithm/introductiontoalgorithm/radix-tree-基数树
 mathjax: true
 ---

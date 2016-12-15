@@ -2,7 +2,9 @@
 title: 《深度探索C++对象模型》笔记汇总
 date: 2011-12-09 22:03
 categories: 深度探索C++对象模型
-tags: Inside The C++ Object Model,笔记
+tags: 
+    - Inside The C++ Object Model
+    - 笔记
 override_permailink: /develop/cpp/《深度探索c对象模型》笔记汇总
 ---
 

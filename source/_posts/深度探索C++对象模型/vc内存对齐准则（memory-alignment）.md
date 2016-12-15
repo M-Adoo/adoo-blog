@@ -2,7 +2,11 @@
 title: VC内存对齐准则（Memory alignment）
 date: 2011-11-24 12:42
 categories: 深度探索C++对象模型
-tags: c++, Inside The C++ Object Model, Memory alignment, 笔记
+tags:
+    - c++
+    - Inside The C++ Object Model
+    - Memory alignment
+    - 笔记
 override_permailink: /develop/cpp/vc内存对齐准则（memory-alignment）
 ---
 
@@ -42,11 +46,13 @@ override_permailink: /develop/cpp/vc内存对齐准则（memory-alignment）
 
 对于类T：
 
-    ```cpp
-    class T{
-        char c;
-        int i;
-        double  d;};
+```cpp
+class T {
+    char c;
+    int i;
+    double  d;
+}
+```
 
 将其sizeof输出后的大小为16，其内存布局如图T.变量c从偏移量为0开始存储，而整形i第一个
 符号条件的偏移量为4，double型d的第一个符号条件的为8。整个对象的大小为16，不需要再进
@@ -62,11 +68,13 @@ override_permailink: /develop/cpp/vc内存对齐准则（memory-alignment）
 
 类L:
 
-    ```cpp
-    class L{
-        char c;
-        double  d;
-        int i;};
+```cpp
+class L {
+    char c;
+    double  d;
+    int i;
+}
+```
 
 它sizeof后的结果或许会令你大吃一惊，或许不会（如果你有认真读前面的两条准则）。L 
 sizeof后的结果是24！同样是一个int，一个char，一个double却整整多出了8个字节。这期间
@@ -85,9 +93,10 @@ sizeof后的结果是24！同样是一个int，一个char，一个double却整�
 
 前面的实例只涉及前两条准则，现在我们来看看第三条的两个实例：
 
-    ```cpp
-    class X{char a;};
-    class Y: virtual public X{};
+```cpp
+class X{char a;};
+class Y: virtual public X{};
+```
 
 Y的大小为:a占一个字节，VbcPoint（我称他为虚基类指针）占四个字节。我们不论a与VbcPoint
 的位置如何摆放，如果将VbcPoint等同于一个成员数据来看的话，sizeof(Y)都应该为8.实际上
@@ -95,10 +104,11 @@ Y的大小为:a占一个字节，VbcPoint（我称他为虚基类指针）占四
 
 对于vptr这个问题则不存在：
 
-    ```cpp
-    class X{
-        char a;
-        virtual int vfc(){};}
+```cpp
+class X{
+    char a;
+    virtual int vfc(){};}
+```
 
 sizeof（X）的大小确实为8.
 
