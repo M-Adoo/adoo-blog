@@ -1,0 +1,26 @@
+language: node_js
+node_js: stable
+branches:
+  only:
+  - master
+before_install:
+- export TZ='Asia/Shanghai'
+- npm install -g hexo
+- npm install -g hexo-cli
+- git config --global user.name "Adoo"
+- git config --global user.email "Adoo@outlook.com"
+
+- sed -i'' "s~git@github.com:M-Adoo/adoo-blog.git~https://${GH_TOKEN}:x-oauth-basic@github.com/M-Adoo/adoo-blog.git~" _config.yml
+
+install:
+- npm install
+script:
+- git submodule init
+- git submodule update
+- hexo clean && hexo g
+after_success:
+- hexo deploy
+
+env:
+  global:
+    secure: RgVkOPTKSK3gh/T77MxaNpX2MHsNMTFiyLR0O4q9l/2LOGViPrWXEHwrALGzTIMWE/ESKtjAPqMvwJXIHXq54737u3mCIccuRrO90rKHmJEyFwZz/DGZV2KdzcfyCjjl1oFnCMBNmmp7CVODGTuaEJfmi6wDfZorh0a/3seJNw5VvU52N50Wgl3ukaHgz4gNP6jI2OyggFs64SCaw9PCoyRoY5zHRaTM6y4yXgTZwUZAp1bFblMkrBUhnJKwwj8ljX4njuxUf47dIbEgu5ay+0osG3dsIjkz1mpJne3L3Mqe+Tj8D26q3IlC6RYrjzfIToiOG5JcTA+xnMs2HZyQAiJhIRyzMybp1EA7oH3umRT/68CO4qBIQvzKRy1NdLRmpo0bd0Krfwe+nJRsO7tUHBIIjUgdNI8lyXLR2AgQUWuG6jsg3zCP6MIaq4IxsI4zAszCe1QF0o644mGWRK7V9X7cJRJsxXjoCbnW2ovbNbS1Pto8iBxQSVICfwYOYA0tMsn9PWeVarph3tQNHtvnbu087grR331aGnFXZZWpzUh9rdyi2bmdX7efxSA47hNyLlMa70oTEH2jWwGAH/tzTZaafkXWIQXOnFisjNG+VP0e+lsP013Or2Bf/AWWRXfKPzqoIusZpRJdC8imP05F3TvUK1vXL3118zHD26N90Vc=
