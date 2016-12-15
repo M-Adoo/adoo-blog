@@ -8,7 +8,12 @@ var permalink = require('hexo/lib/plugins/filter/post_permalink')
 hexo.extend.filter.unregister('post_permalink', permalink);
 hexo.extend.filter.register('post_permalink', function (data) {
     if (typeof data.override_permailink != "undefined") {
-        return data.override_permailink + '.html';
+        var path = data.override_permailink + '.html';
+        var i = 0;
+        while('/\\'.includes(path.charAt(i))) {
+            i += 1;
+        }
+        return path.substr(i);
     } else {
         return permalink.apply(this, [data])
     }
