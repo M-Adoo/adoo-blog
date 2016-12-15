@@ -4,7 +4,8 @@ date: 2011-11-24 12:41
 categories: 深度探索C++对象模型
 tags:
 	- c++
-	- Inside The C++ Object Model, 笔记
+	- Inside The C++ Object Model
+	- 笔记
 override_permailink: /develop/cpp/c类对象的大小
 ---
 
