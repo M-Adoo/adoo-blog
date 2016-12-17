@@ -87,3 +87,13 @@ search:
   field: post
   format: html
   limit: 10000
+
+# Support GitHub flavored markdown
+marked:
+  gfm: true
+  pedantic: false
+  sanitize: false
+  tables: true
+  breaks: true
+  smartLists: true
+  smartypants: true

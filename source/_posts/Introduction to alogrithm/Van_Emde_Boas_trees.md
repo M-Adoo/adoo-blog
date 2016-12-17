@@ -5,6 +5,7 @@ categories: Introduction to Algorithm -third edition
 tags:
     - Exercises
     - 算法导论
+    - van Emde Boas trees
 override_permailink: /algorithm/introductiontoalgorithm/Van_Emde_Boas_trees
 mathjax: true
 ---
@@ -84,11 +85,11 @@ constant height怎么样，一路递归下去情况会如何?
 方的规模缩小的话，会有一个什么效果？假设我们能做到以开平方的规模递归减小一个
 数据结构的规模，而且每个操作在每一级递归上只产生一次新的递归调用，那么 对于一
 个大小为\\( u \\)的数据结构的操作有： 
-\[ T(u) = T(\sqrt{u}) + O(1) \]
+\\[ T(u) = T(\sqrt{u}) + O(1) \\]
 令\\( m= \lg{u} \\), 有\\( u = 2^m \\)。那么可以有：
-\[ T(2^m) = T(2^{m/2}) + O(1)\]
+\\[ T(2^m) = T(2^{m/2}) + O(1)\\]
 设\\( S(m) = T(2^m)\\),可得新方程：
-\[ S(m) = S(m/2) + O(1)\]
+\\[ S(m) = S(m/2) + O(1)\\]
 可以得出\\( S(m) = O(\lg m) \\),回到\\( T(u) \\)上来，那么
 \\( T(u) = T(2^m) = S(m) = O(\lg m) = O(\lg{\lg u}) \\)。
 
@@ -165,10 +166,10 @@ PROTO-VEB-MINIMUMN(V)
 ```
 
 复杂度
-\[ T(u) = 2T(\sqrt u) + O(1)\] 设\\( u = 2^m\\) 
-\[ T(2^m) = 2T(2^{m/2}) + O(1)\] 设\\(S(m) = T(2^m)\\),得：
-\[S(m) = 2S(m/2) + O(1)\]
-\[T(u) = S(m) = \theta(m) = \theta(lg u)\]
+\\[ T(u) = 2T(\sqrt u) + O(1) \\] 设\\( u = 2^m\\) 
+\\[ T(2^m) = 2T(2^{m/2}) + O(1) \\] 设\\(S(m) = T(2^m)\\),得：
+\\[ S(m) = 2S(m/2) + O(1) \\]
+\\[ T(u) = S(m) = \theta(m) = \theta(lg u) \\]
 
 #### 找x的后继
 
@@ -198,8 +199,8 @@ PROTO-VEB-SUCCESSOR(V, x)
                 return NIL
 ```
 复杂度: 
-\[ T(u) = 2T(\sqrt u) + \theta(\lg{\sqrt u})\]
-\[ = 2T(\sqrt u) + \theta(\lg u)\]
+\\[ T(u) = 2T(\sqrt u) + \theta(\lg{\sqrt u}) \\]
+\\[ = 2T(\sqrt u) + \theta(\lg u) \\]
 用与前文类似的方法可以化得\\( T(u) = \theta(\lg u\lg\lg u) \\)
 
 #### 插入元素
@@ -216,7 +217,7 @@ PROTO-VEB-INSERT(V, x)
 ```
 
 复杂度和PROTO-VEB-MINIMUN一样
-\[ T(u) = 2T(\sqrt u) + O(1)\]
+\\[ T(u) = 2T(\sqrt u) + O(1) \\]
 即
 \\(\theta(\lg u)\\)
 
@@ -262,9 +263,9 @@ vEB(\\(\lfloor (\lg u)/2 \rfloor\\))。直观起见，将
     \\(O(1)\\)。
 
 重新定义一下几个方法：
-\[high(x) = \lfloor x / \sqrt[\downarrow] u \rfloor\]
-\[low(x) = x \mod \sqrt[\downarrow] u\]
-\[index(x, y) = x \sqrt[\uparrow] u + y\]
+\\[high(x) = \lfloor x / \sqrt[\downarrow] u \rfloor \\]
+\\[low(x) = x \mod \sqrt[\downarrow] u \\]
+\\[index(x, y) = x \sqrt[\uparrow] u + y \\]
 
 现在，vEB的结构应该是这样的：
 ![][veb_struct]
