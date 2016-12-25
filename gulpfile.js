@@ -1,10 +1,10 @@
 var gulp = require('gulp');
-var minifycss = require('gulp-minify-css');
+var minifycss = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
 var htmlmin = require('gulp-htmlmin');
 var htmlclean = require('gulp-htmlclean');
 // 压缩css文件
-gulp.task('minify-css', function() {
+gulp.task('clean-css', function() {
   return gulp.src('./public/**/*.css')
   .pipe(minifycss())
   .pipe(gulp.dest('./public'));
@@ -29,5 +29,5 @@ gulp.task('minify-js', function() {
 });
 // 默认任务
 gulp.task('default', [
-  'minify-html','minify-css','minify-js'
+  'minify-html','clean-css','minify-js'
 ]);
