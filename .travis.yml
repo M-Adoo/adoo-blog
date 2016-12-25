@@ -16,6 +16,7 @@ script:
 - git submodule init
 - git submodule update
 - hexo clean && hexo g
+- gulp
 after_success:
 - cd ./public
 - git init
