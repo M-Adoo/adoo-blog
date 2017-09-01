@@ -6,7 +6,7 @@ tags:
     - c++
     - Inside The C++ Object Model
     - 笔记
-override_permailink: /develop/cpp/new expression、operator new和placement new——三个妞（new）的故事（3）
+override_permailink: /develop/cpp/new-expression、operator-new-和-placement-new三个妞（new）的故事（3）
 ---
 
 
