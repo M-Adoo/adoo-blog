@@ -1,3 +1,6 @@
 [submodule "themes/next"]
 	path = themes/next
 	url = https://github.com/M-Adoo/hexo-theme-next.git
+[submodule "themes/maupassant"]
+	path = themes/maupassant
+	url = git@github.com:M-Adoo/maupassant-hexo.git

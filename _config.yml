@@ -7,7 +7,8 @@ title: "Adoo's blog"
 subtitle: "怀理想主义，行务实之道。"
 description: "怀理想主义，行务实之道。"
 author: Adoo
-language: zh-Hans
+language: en
+
 timezone:
 
 # URL
@@ -63,7 +64,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: maupassant
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
