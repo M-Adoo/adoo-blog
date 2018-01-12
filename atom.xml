@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Adoo&#39;s blog</title>
+  
+  <subtitle>怀理想主义，行务实之道。</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://Www.roading.org/"/>
+  <updated>2018-01-12T16:18:27.221Z</updated>
+  <id>http://Www.roading.org/</id>
+  
+  <author>
+    <name>Adoo</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【译】子弹日志法（Bullet Journal）</title>
+    <link href="http://Www.roading.org/others/Bullet_Journal.html"/>
+    <id>http://Www.roading.org/others/Bullet_Journal.html</id>
+    <published>2014-02-20T12:30:00.000Z</published>
+    <updated>2018-01-12T16:18:27.221Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;em&gt;年前看了一篇国外程序员的博客，有提到Bullet Journal，不知所云。幸好我当时&lt;br&gt;Gooole了一下。在Youtube上看到一份关于它的视频，便来了兴趣。当天下午便在它&lt;br&gt;它的官网趴了半个下午，将它系统的学习了一遍。到现在，已经足有近月了，最初看&lt;b
+      
+    
+    </summary>
+    
+      <category term="Others" scheme="http://Www.roading.org/categories/Others/"/>
+    
+    
+      <category term="翻译" scheme="http://Www.roading.org/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>并查集(Disjoint Set)</title>
+    <link href="http://Www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html"/>
+    <id>http://Www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html</id>
+    <published>2013-07-18T10:00:00.000Z</published>
+    <updated>2018-01-12T16:18:27.217Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一些应用经常有这样的需求：查找一个包含某个元素的唯一集合，合并两个集合。&lt;br&gt;搜了一下google能够应用的地方还是挺多的，这里略去不表。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;并查集&lt;/strong&gt;又称不相交集，有两个名字的原因在于它原就有两个不同的英文名字，Disjoint
+      
+    
+    </summary>
+    
+      <category term="Introduction to Algorithm -third edition" scheme="http://Www.roading.org/categories/Introduction-to-Algorithm-third-edition/"/>
+    
+    
+      <category term="算法导论" scheme="http://Www.roading.org/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Disjoint set" scheme="http://Www.roading.org/tags/Disjoint-set/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Van Emde Boas trees</title>
+    <link href="http://Www.roading.org/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html"/>
+    <id>http://Www.roading.org/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html</id>
+    <published>2013-06-10T09:28:00.000Z</published>
+    <updated>2018-01-12T16:18:27.217Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;van Emde Boas trees 支持所有优先级优先级队列的操作，并且巧妙的是它对于SEARCH,&lt;br&gt;INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在最坏复&lt;br&gt;杂度\( O(\lg{\lg n}) \)之内。不过有些限制的是，所有的Kye值都必须在&lt;br&gt;\( 0 \dots n-1 \)之间，且不能有重复值。换言之，他的算法复杂度不由数据的规模&lt;br&gt;有多 大而决定，而由key值的取值范围而决定。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Introduction to Algorithm -third edition" scheme="http://Www.roading.org/categories/Introduction-to-Algorithm-third-edition/"/>
+    
+    
+      <category term="算法导论" scheme="http://Www.roading.org/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="Exercises" scheme="http://Www.roading.org/tags/Exercises/"/>
+    
+      <category term="van Emde Boas trees" scheme="http://Www.roading.org/tags/van-Emde-Boas-trees/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>未半</title>
+    <link href="http://Www.roading.org/essaies/less_than_half_of_year.html"/>
+    <id>http://Www.roading.org/essaies/less_than_half_of_year.html</id>
+    <published>2012-12-25T08:58:00.000Z</published>
+    <updated>2018-01-12T16:18:27.221Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;来珠海也近半年了，半年来并没有太大的不顺。大概却正因为这顺利，让我恍然未觉的过了半年。时间过得如此悄无声息，让我战战栗生出了一股惶恐来。每过一月，或又仅有一旬，当我注意到桌上的台历忘了翻动，又或者电脑上的日期让我觉得陌生时，我总觉得我应该静下来好好想想，生活是不是驶往我期待的方向。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://Www.roading.org/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="随笔" scheme="http://Www.roading.org/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>斐波那契堆的C++实现</title>
+    <link href="http://Www.roading.org/algorithm/fibonacci-heaps-in-cpp.html"/>
+    <id>http://Www.roading.org/algorithm/fibonacci-heaps-in-cpp.html</id>
+    <published>2012-09-30T16:00:00.000Z</published>
+    <updated>2018-01-12T16:18:27.213Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;时间过的真是快，都是七月份写的代码了，两个多月了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Introduction to Algorithm -third edition" scheme="http://Www.roading.org/categories/Introduction-to-Algorithm-third-edition/"/>
+    
+    
+      <category term="算法导论" scheme="http://Www.roading.org/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Fibonacci heaps" scheme="http://Www.roading.org/tags/Fibonacci-heaps/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>载酒买花年少事，浑不似，旧心情</title>
+    <link href="http://Www.roading.org/essaies/lonely.html"/>
+    <id>http://Www.roading.org/essaies/lonely.html</id>
+    <published>2012-09-13T16:00:00.000Z</published>
+    <updated>2018-01-12T16:18:27.221Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当我打开记事本想写点什么的时候，写一个怎样的题目却让我犯难。难在我并无什么特别的要求，标题党？我不需要夺人眼球。做点概括？我也并没有要具体写点什么东西。我想大概这篇短文并不需要一个标题。不过，鉴于这个世界有这么多长着脑袋却并没有什么用处的脑残们，我认为我的这篇短文也配拥有一个标题，尽管它或许并没有太大的用处。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://Www.roading.org/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="随笔" scheme="http://Www.roading.org/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="读书" scheme="http://Www.roading.org/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>斐波那契堆(Fibonacci Heaps)</title>
+    <link href="http://Www.roading.org/algorithm/introductiontoalgorithm/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%A0%86fibonacci-heaps.html"/>
+    <id>http://Www.roading.org/algorithm/introductiontoalgorithm/斐波那契堆fibonacci-heaps.html</id>
+    <published>2012-07-30T14:33:00.000Z</published>
+    <updated>2018-01-12T16:18:27.217Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;概览&quot;&gt;&lt;a href=&quot;#概览&quot; class=&quot;headerlink&quot; title=&quot;概览&quot;&gt;&lt;/a&gt;概览&lt;/h3&gt;&lt;p&gt;斐波那契堆是由一组最小堆有序树组成，其中的每棵树都必须符合最小堆属性。&lt;br&gt;简单点，斐波那契堆是由一组有点特别的树组成。除了两个与元素删除
+      
+    
+    </summary>
+    
+      <category term="Introduction to Algorithm -third edition" scheme="http://Www.roading.org/categories/Introduction-to-Algorithm-third-edition/"/>
+    
+    
+      <category term="算法导论" scheme="http://Www.roading.org/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="algorithm" scheme="http://Www.roading.org/tags/algorithm/"/>
+    
+      <category term="fibonacci heaps" scheme="http://Www.roading.org/tags/fibonacci-heaps/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 基础入门笔记(5)</title>
+    <link href="http://Www.roading.org/develop/python/python-%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B05.html"/>
+    <id>http://Www.roading.org/develop/python/python-基础入门笔记5.html</id>
+    <published>2012-05-03T08:12:00.000Z</published>
+    <updated>2018-01-12T16:18:27.221Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Pickle&quot;&gt;&lt;a href=&quot;#Pickle&quot; class=&quot;headerlink&quot; title=&quot;Pickle&quot;&gt;&lt;/a&gt;Pickle&lt;/h3&gt;&lt;p&gt;python 支持一些常见模式的文件处理方式，通过read 、readline或 write 函数来读写文件
+      
+    
+    </summary>
+    
+      <category term="A byte of python" scheme="http://Www.roading.org/categories/A-byte-of-python/"/>
+    
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="python" scheme="http://Www.roading.org/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 基础入门笔记(4)</title>
+    <link href="http://Www.roading.org/develop/python/python-%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B04.html"/>
+    <id>http://Www.roading.org/develop/python/python-基础入门笔记4.html</id>
+    <published>2012-05-02T09:12:00.000Z</published>
+    <updated>2018-01-12T16:18:27.221Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;作为一门面向对象语言，类和对象是 python的一个重要的概念。关于什么是面向对象和什么是面向对象过程，这里不做赘言。&lt;br&gt;面向对象基本思想上python 并没有和C++有太大异同，这里主要对一些语法和细节上的东西做一些记录。但 python 与 C++&lt;br&gt;在对象的范
+      
+    
+    </summary>
+    
+      <category term="A byte of python" scheme="http://Www.roading.org/categories/A-byte-of-python/"/>
+    
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="python" scheme="http://Www.roading.org/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 基础入门笔记(3)——内建数据结构</title>
+    <link href="http://Www.roading.org/develop/python/python-%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B03.html"/>
+    <id>http://Www.roading.org/develop/python/python-基础入门笔记3.html</id>
+    <published>2012-05-01T07:11:00.000Z</published>
+    <updated>2018-01-12T16:18:27.221Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Python 有四个内建的数据结构——list、tuple、dictionary、set。&lt;/p&gt;
+&lt;h3 id=&quot;列表（List）&quot;&gt;&lt;a href=&quot;#列表（List）&quot; class=&quot;headerlink&quot; title=&quot;列表（List）&quot;&gt;&lt;/a&gt;列表（List）&lt;
+      
+    
+    </summary>
+    
+      <category term="A byte of python" scheme="http://Www.roading.org/categories/A-byte-of-python/"/>
+    
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="python" scheme="http://Www.roading.org/tags/python/"/>
+    
+      <category term="data structure" scheme="http://Www.roading.org/tags/data-structure/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 基础入门笔记(2)——函数、模块和包</title>
+    <link href="http://Www.roading.org/develop/python/python-%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02%E5%87%BD%E6%95%B0%E3%80%81%E6%A8%A1%E5%9D%97%E5%92%8C%E5%8C%85.html"/>
+    <id>http://Www.roading.org/develop/python/python-基础入门笔记2函数、模块和包.html</id>
+    <published>2012-04-29T07:27:00.000Z</published>
+    <updated>2018-01-12T16:18:27.221Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;函数、模块和包对于代码的复用都有非常重要的意义，当然面向对象中的类其实在代码的复用性上也有举足轻重的地位。前天睡前看了《a byte of python》中关于函数、模块和包的这个部分，今天又查了查官网文档以及网上的其它一些资料，把一些疑惑给解决。现在写一下关于这部分的笔记
+      
+    
+    </summary>
+    
+      <category term="A byte of python" scheme="http://Www.roading.org/categories/A-byte-of-python/"/>
+    
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="python" scheme="http://Www.roading.org/tags/python/"/>
+    
+      <category term="代码组织" scheme="http://Www.roading.org/tags/%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>都废</title>
+    <link href="http://Www.roading.org/essaies/Tropic-of-Cancer.html"/>
+    <id>http://Www.roading.org/essaies/Tropic-of-Cancer.html</id>
+    <published>2012-04-26T06:31:00.000Z</published>
+    <updated>2018-01-12T16:18:27.221Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;《废都》，便是迷醉于欲望之中，却又无法抽身自救的那么一群人组成。即便是尼姑庵的慧明亦脱不出肉欲 、权欲的高墙。大概世道如此，现实并不是人们掉进了欲望的天坑，反而是，欲望便如已然合围的高墙，人生而就在墙内。不是陷入了，而是逃不出。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://Www.roading.org/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Python 基础入门笔记(1)</title>
+    <link href="http://Www.roading.org/develop/python/python-%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B01.html"/>
+    <id>http://Www.roading.org/develop/python/python-语法基础笔记1.html</id>
+    <published>2012-04-24T09:25:00.000Z</published>
+    <updated>2018-01-12T16:18:27.221Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;内建类型&quot;&gt;&lt;a href=&quot;#内建类型&quot; class=&quot;headerlink&quot; title=&quot;内建类型&quot;&gt;&lt;/a&gt;内建类型&lt;/h3&gt;&lt;p&gt;python 中提供的内建类型大概与C++中提供的相仿，却更简洁。&lt;/p&gt;
+&lt;p&gt;数值方面的内建类型有整型、浮点型、和复数类
+      
+    
+    </summary>
+    
+      <category term="A byte of python" scheme="http://Www.roading.org/categories/A-byte-of-python/"/>
+    
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="python" scheme="http://Www.roading.org/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>B-树的C++实现</title>
+    <link href="http://Www.roading.org/algorithm/introductiontoalgorithm/b-%E6%A0%91%E7%9A%84c%E5%AE%9E%E7%8E%B0.html"/>
+    <id>http://Www.roading.org/algorithm/introductiontoalgorithm/b-树的c实现.html</id>
+    <published>2012-04-19T14:28:00.000Z</published>
+    <updated>2018-01-12T16:18:27.217Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;与之前实现哈希表、红黑树…这些数据结构和算法不同，B-trees的实现不再追求模仿STL，因此没有实现b-trees自己的迭代器。这些天温习之前的笔记的过程中意识到了一个问题，所有这些的数据结构毕竟只是作为练习之用，而不是出于作为以后使用的库的目的。故应当以逻辑清晰为第一要
+      
+    
+    </summary>
+    
+      <category term="Introduction to Algorithm -third edition" scheme="http://Www.roading.org/categories/Introduction-to-Algorithm-third-edition/"/>
+    
+    
+      <category term="算法导论" scheme="http://Www.roading.org/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="B-trees" scheme="http://Www.roading.org/tags/B-trees/"/>
+    
+      <category term="c++" scheme="http://Www.roading.org/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法导论——B-trees</title>
+    <link href="http://Www.roading.org/algorithm/introductiontoalgorithm/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BAb-trees.html"/>
+    <id>http://Www.roading.org/algorithm/introductiontoalgorithm/算法导论b-trees.html</id>
+    <published>2012-04-15T14:23:00.000Z</published>
+    <updated>2018-01-12T16:18:27.217Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;B-trees(叫“B树”还是“B-树”？我还是用它的英文名吧)，是一种为磁盘或&lt;br&gt;其它辅存设备而设计的平衡树。它与红黑树有些类似，但是在节省IO操作&lt;br&gt;上比红黑树表现的更好。很多数据库系统会用B-trees或它的变形来存储&lt;br&gt;信息。&lt;/p&gt;
+&lt;p&gt;B-tree
+      
+    
+    </summary>
+    
+      <category term="Introduction to Algorithm -third edition" scheme="http://Www.roading.org/categories/Introduction-to-Algorithm-third-edition/"/>
+    
+    
+      <category term="算法导论" scheme="http://Www.roading.org/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="B-trees" scheme="http://Www.roading.org/tags/B-trees/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法导论——平摊分析</title>
+    <link href="http://Www.roading.org/algorithm/introductiontoalgorithm/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E5%B9%B3%E6%91%8A%E5%88%86%E6%9E%90.html"/>
+    <id>http://Www.roading.org/algorithm/introductiontoalgorithm/算法导论平摊分析.html</id>
+    <published>2012-03-29T07:52:00.000Z</published>
+    <updated>2018-01-12T16:18:27.217Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;平摊分析(Amortized Analysis)将数据结构的不同操作放到一起来考虑，而不是仅对某种操作的单一考虑。在平摊分析中，不会涉及概率问题。平摊分析可以用来证明，在一系列操作中，即使某个操作代价很大，但平均代价仍是很小的。本文记录三种平摊分析最常用的技术。&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="Introduction to Algorithm -third edition" scheme="http://Www.roading.org/categories/Introduction-to-Algorithm-third-edition/"/>
+    
+    
+      <category term="算法导论" scheme="http://Www.roading.org/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Amortized Analysis" scheme="http://Www.roading.org/tags/Amortized-Analysis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>赫夫曼编码</title>
+    <link href="http://Www.roading.org/algorithm/introductiontoalgorithm/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E8%B5%AB%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81.html"/>
+    <id>http://Www.roading.org/algorithm/introductiontoalgorithm/算法导论赫夫曼编码.html</id>
+    <published>2012-03-28T08:01:00.000Z</published>
+    <updated>2018-01-12T16:18:27.217Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;赫夫曼编码(huffman codes)是一种非常有用的数据压缩方法，通常能将数据压&lt;br&gt;缩20%~90%。从具体问题出发，假设我们有一包含10000个字符的文件，这些字&lt;br&gt;符仅由6个不同的字符组成，就设这6个字符分别为“abcdef”，下面的表给出了&lt;br&gt;这6个字
+      
+    
+    </summary>
+    
+      <category term="Introduction to Algorithm -third edition" scheme="http://Www.roading.org/categories/Introduction-to-Algorithm-third-edition/"/>
+    
+    
+      <category term="算法导论" scheme="http://Www.roading.org/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="huffman codes" scheme="http://Www.roading.org/tags/huffman-codes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>贪心算法</title>
+    <link href="http://Www.roading.org/algorithm/introductiontoalgorithm/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.html"/>
+    <id>http://Www.roading.org/algorithm/introductiontoalgorithm/算法导论贪心算法.html</id>
+    <published>2012-03-27T08:46:00.000Z</published>
+    <updated>2018-01-12T16:18:27.217Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;与动态规划相同贪心算法通过做出一系列选择来构建出问题的最优解，不同的是贪心算法&lt;br&gt;并不会全局考虑各种选择，它只做当前看起来最佳的选择。如君所见，贪心算法企图用每&lt;br&gt;一步的最优解来构建出整个问题的最优解。这并不能保证总能构建出最优解，但它通常能&lt;br&gt;做到。我们可以先
+      
+    
+    </summary>
+    
+      <category term="Introduction to Algorithm -third edition" scheme="http://Www.roading.org/categories/Introduction-to-Algorithm-third-edition/"/>
+    
+    
+      <category term="算法导论" scheme="http://Www.roading.org/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="c++" scheme="http://Www.roading.org/tags/c/"/>
+    
+      <category term="greedy algorithm" scheme="http://Www.roading.org/tags/greedy-algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>最优二叉查找树</title>
+    <link href="http://Www.roading.org/algorithm/introductiontoalgorithm/%E6%9C%80%E4%BC%98%E5%84%BF%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91.html"/>
+    <id>http://Www.roading.org/algorithm/introductiontoalgorithm/最优儿叉查找树.html</id>
+    <published>2012-03-26T03:56:00.000Z</published>
+    <updated>2018-01-12T16:18:27.217Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;假如我们要设计一个简单的程序将一段英文翻译成法语，那么就需要为每个&lt;br&gt;英语单词找到对应的法语单词，简单的做法是在单词库中对每个单词进行遍&lt;br&gt;历查找。更快一点的做法是，我们可以将单词库建成一颗平衡二叉搜索树&lt;br&gt;——用英文单词做Key,对应的法语单词做附属信息。第二
+      
+    
+    </summary>
+    
+      <category term="Introduction to Algorithm -third edition" scheme="http://Www.roading.org/categories/Introduction-to-Algorithm-third-edition/"/>
+    
+    
+      <category term="算法导论" scheme="http://Www.roading.org/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="c++" scheme="http://Www.roading.org/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>最长单调子序列问题</title>
+    <link href="http://Www.roading.org/algorithm/introductiontoalgorithm/%E6%9C%80%E9%95%BF%E5%8D%95%E8%B0%83%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98.html"/>
+    <id>http://Www.roading.org/algorithm/introductiontoalgorithm/最长单调子序列问题.html</id>
+    <published>2012-03-22T09:19:00.000Z</published>
+    <updated>2018-01-12T16:18:27.217Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h5 id=&quot;Exercises-15-4-5&quot;&gt;&lt;a href=&quot;#Exercises-15-4-5&quot; class=&quot;headerlink&quot; title=&quot;Exercises 15.4-5&quot;&gt;&lt;/a&gt;Exercises 15.4-5&lt;/h5&gt;&lt;blockquote&gt;
+&lt;p&gt;G
+      
+    
+    </summary>
+    
+      <category term="Introduction to Algorithm -third edition" scheme="http://Www.roading.org/categories/Introduction-to-Algorithm-third-edition/"/>
+    
+    
+      <category term="算法导论" scheme="http://Www.roading.org/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="笔记" scheme="http://Www.roading.org/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="LIS" scheme="http://Www.roading.org/tags/LIS/"/>
+    
+  </entry>
+  
+</feed>
